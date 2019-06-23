@@ -28,6 +28,7 @@
 //   nodemon server.js
 
 const express = require('express');
+require('dotenv').config();
 const app = express();
 const favicon = require('express-favicon');
 
@@ -41,7 +42,6 @@ const favicon = require('express-favicon');
 //
 // Learn more: http://expressjs.com/en/starter/static-files.html
 app.use(express.static('static_files'));
-
 app.use(favicon(__dirname + '/static_files/favicon.ico'));
 
 // start the server at URL: http://localhost:3000/

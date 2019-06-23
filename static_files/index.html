@@ -9,21 +9,22 @@
 NOTE: EVEN IF THE INSTRUCTIONS MENTION AN UPDATED VERSION OF FIREBASE IN THE
 FUTURE, MAKE SURE TO IMPORT firebase.js AND NOT SOMETHING LIKE firebase-app.js
 
-<script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
+-->
+
+<script src="https://www.gstatic.com/firebasejs/6.2.2/firebase-app.js"></script>
 <script>
   // Initialize Firebase
   var config = {
-    apiKey: <INSERT YOUR INFORMATION HERE>,
-    authDomain: <INSERT YOUR INFORMATION HERE>,
-    databaseURL: <INSERT YOUR INFORMATION HERE>,
-    projectId: <INSERT YOUR INFORMATION HERE>,
-    storageBucket: <INSERT YOUR INFORMATION HERE>,
-    messagingSenderId: <INSERT YOUR INFORMATION HERE>,
+    apiKey: process.env.API_KEY,
+    authDomain: process.env.AUTH_DOMAIN,
+    databaseURL: process.env.DB_URL,
+    projectId: process.env.PROJ_ID,
+    storageBucket: process.env.STOR_BUCKET,
+    messagingSenderId: process.env.MSG_SEND_ID,
+    appId: process.env.APP_ID
   };
   firebase.initializeApp(config);
 </script>
-
--->
 
 <script src="jquery-3.3.1.min.js"></script>
 
