@@ -29,6 +29,7 @@
 
 const express = require('express');
 const app = express();
+const favicon = require('express-favicon');
 
 // put all of your static files (e.g., HTML, CSS, JS, JPG) in the static_files/
 // sub-directory, and the server will serve them from there. e.g.,:
@@ -40,6 +41,8 @@ const app = express();
 //
 // Learn more: http://expressjs.com/en/starter/static-files.html
 app.use(express.static('static_files'));
+
+app.use(favicon(__dirname + '/static_files/favicon.ico'));
 
 // start the server at URL: http://localhost:3000/
 const PORT = process.env.PORT || 3000;
