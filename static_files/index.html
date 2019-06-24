@@ -1,125 +1,18 @@
 <!-- Web frontend for Pokémon Battle Assistant -->
+<!DOCTYPE html>
 
-<html>
+<html lang="en">
 <head>
-<title>Pokémon Battle Assistant</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="jquery-3.3.1.min.js"></script>
 
-<!-- put your Firebase initialization code up here before all other JavaScript code. Here's an example snippet:
-
-NOTE: EVEN IF THE INSTRUCTIONS MENTION AN UPDATED VERSION OF FIREBASE IN THE
-FUTURE, MAKE SURE TO IMPORT firebase.js AND NOT SOMETHING LIKE firebase-app.js
-
--->
-
-<script src="https://www.gstatic.com/firebasejs/6.2.2/firebase-app.js"></script>
-<script>
-  // Initialize Firebase
-  var config = {
-    apiKey: process.env.API_KEY,
-    authDomain: process.env.AUTH_DOMAIN,
-    databaseURL: process.env.DB_URL,
-    projectId: process.env.PROJ_ID,
-    storageBucket: process.env.STOR_BUCKET,
-    messagingSenderId: process.env.MSG_SEND_ID,
-    appId: process.env.APP_ID
-  };
-  firebase.initializeApp(config);
-</script>
-
-<script src="jquery-3.3.1.min.js"></script>
-
-<script type="text/javascript">
-
-// jQuery convention for running when the document has been fully loaded:
-$(document).ready(() => {
-  const database = firebase.database();
-
-  $('#resetButton').click(() => {
-    console.log('Resetting the database');
-
-    /* remember the fake JavaScript object database from PetsApp v1?
-
-    const fakeDatabase = {
-      'Philip': {job: 'professor', pet: 'cat.jpg'},
-      'John': {job: 'student',   pet: 'dog.jpg'},
-      'Carol': {job: 'engineer',  pet: 'bear.jpg'}
-    };
-    */
-    database.ref('users/').remove(); // delete the entire collection
-
-    // writes data to the database:
-    database.ref('users/Philip').set({job: 'professor', pet: 'cat.jpg'});
-    database.ref('users/John').set({job: 'student',   pet: 'dog.jpg'});
-    database.ref('users/Carol').set({job: 'engineer',  pet: 'bear.jpg'});
-  });
-
-  // use .on('value' to get notified in real-time whenever anyone
-  // on the internet updates your database. cool!
-  database.ref('users/').on('value', (snapshot) => {
-    const allUsers = snapshot.val();
-    console.log('users/ changed:', allUsers);
-    if (allUsers) {
-      $('#status').html(''); // clear the HTML
-      $('#status').append('List of users:');
-      Object.keys(allUsers).forEach((name) => {
-        $('#status').append('<li>' + name + ' ' + allUsers[name].job + ' ' + allUsers[name].pet + '</li>');
-      });
-    }
-  });
-
-  $('#readButton').click(() => {
-    const key = 'users/' + $('#nameBox').val();
-
-    // 'once' reads the value once from the database
-    database.ref(key).once('value', (snapshot) => {
-      const data = snapshot.val();
-
-      console.log('You received some data!', data);
-      if (!data) {
-        // clear the display
-        $('#jobDiv').html('');
-        $('#petImage').attr('src', '').attr('width', '0px');
-        $('#status').html('Error: could not find user: ' + key);
-        return;
-      }
-
-      if (data.job && data.pet) {
-        $('#jobDiv').html('My job is ' + data.job);
-        $('#petImage').attr('src', data.pet).attr('width', '300px');
-      } else {
-        // clear the display
-        $('#jobDiv').html('');
-        $('#petImage').attr('src', '').attr('width', '0px');
-      }
-    });
-  });
-
-  $('#allUsersButton').click(() => {
-    database.ref('users/').once('value', (snapshot) => {
-      const data = snapshot.val();
-      console.log('You received some data!', data);
-      $('#status').html('All users: ' + Object.keys(data));
-    });
-  });
-
-  $('#insertButton').click(() => {
-    const name = $('#insertNameBox').val();
-    database.ref('users/' + name).set({
-      job: $('#insertJobBox').val(),
-      pet: $('#insertPetBox').val()
-    });
-  });
-
-  $('#deleteButton').click(() => {
-    const name = $('#deleteNameBox').val();
-    database.ref('users/' + name).remove();
-  });
-});
-</script>
-
-<link rel="shortcut icon" type="image/png" href="favicon.ico"/>
-
+  <title>Pokémon Battle Assistant</title>
+  <link rel="stylesheet" href="public/CSS/index.css">
+  <link rel="shortcut icon" type="image/png" href="favicon.ico"/>
 </head>
+
 <body>
   <h1>Pokémon Battle Assistant</h1>
 
@@ -131,23 +24,66 @@ $(document).ready(() => {
 
   <hr/>
   Pokémon Name: <input id="nameBox" type="text" size="20"/>
-  <button id="readButton">Add to Party</button>
+  <button id="addParty">Add to Party</button>
 
   <div id="jobDiv"></div>
   <img id="petImage"></img>
 
   <hr/>
   Pokémon Name: <input id="deleteNameBox" type="text" size="20"/>
-  <button id="deleteButton">Delete from Party</button>
+  <button id="deleteParty">Delete from Party</button>
 
   <hr/>
   <h3>Opponent Pokémon</h3>
 
   <hr/>
   Pokémon Name: <input id="deleteNameBox" type="text" size="20"/>
-  <button id="deleteButton">Make Opponent</button>
+  <button id="makeOpponent">Make Opponent</button>
 
   <hr/>
+
+  <br/>
+  <br/>
+  <br/>
+  <h3>Login</h3>
+  <hr/>
+  <br/>
+  Email: <input id="txtEmail" type="email" size="20"/> <br/> <br/>
+  Password: <input id="txtPassword" type="password" size="20"/> <br/> <br/>
+  <button id="loginBtn" class="btn btn-action">Login</button>
+  <button id="signUpBtn" class="btn btn-secondary">Sign Up</button>
+  <button id="logoutBtn" class="btn btn-action hide">Logout</button>
+
   <div id="status"></div>
+
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/6.2.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.2.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.2.2/firebase-firestore.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+      https://firebase.google.com/docs/web/setup#config-web-app -->
+
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyDF2xs2yu9BzBJnmX7myf7jr9X5uao6GNQ",
+      authDomain: "pokemon-battle-assist-db.firebaseapp.com",
+      databaseURL: "https://pokemon-battle-assist-db.firebaseio.com",
+      projectId: "pokemon-battle-assist-db",
+      // storageBucket: "pokemon-battle-assist-db.appspot.com",
+      // messagingSenderId: "182570572787",
+      appId: "1:182570572787:web:8b45f539913b26ef"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    // Make auth and firestore references
+    const auth = firebase.auth();
+    const database = firebase.firestore();
+  </script>
+
+  <script src='public/JS/auth.js'></script>
+  <!-- script src='public/JS/index.js'></script -->
 </body>
 </html>
