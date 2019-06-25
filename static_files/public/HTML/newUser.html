@@ -6,42 +6,27 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <script src="jquery-3.3.1.min.js"></script>
+  <script src="../../jquery-3.3.1.min.js"></script>
 
   <title>Pokémon Battle Assistant</title>
-  <link rel="stylesheet" href="public/CSS/index.css">
-  <link rel="shortcut icon" type="image/png" href="favicon.ico"/>
+  <link rel="stylesheet" href="../CSS/login.css">
+  <link rel="shortcut icon" type="image/png" href=".../favicon.ico"/>
 </head>
 
 <body>
   <h1>Pokémon Battle Assistant</h1>
-
-  <button id="resetButton">Reset Party</button>
-  <button id="resetButton">Reset Opponent</button>
-  <hr/>
-
-  <h3>Your Pokémon</h3>
-
-  <hr/>
-  Pokémon Name: <input id="nameBox" type="text" size="20"/>
-  <button id="addParty">Add to Party</button>
-
-  <div id="jobDiv"></div>
-  <img id="petImage"></img>
-
-  <hr/>
-  Pokémon Name: <input id="deleteNameBox" type="text" size="20"/>
-  <button id="deleteParty">Delete from Party</button>
-
-  <hr/>
-  <h3>Opponent Pokémon</h3>
-
-  <hr/>
-  Pokémon Name: <input id="deleteNameBox" type="text" size="20"/>
-  <button id="makeOpponent">Make Opponent</button>
-
   <br/>
-  <button id="logoutBtnIndex" class="btn btn-action hide">Logout</button>
+  <h3>Sign Up</h3>
+  <hr/>
+  <br/>
+  Email: <input id="txtEmail" type="email" size="20"/> <br/> <br/>
+  New Password: <input id="txtPassword1" type="password" size="20"/> <br/> <br/>
+  Repeat Password: <input id="txtPassword2" type="password" size="20"/> <br/> 
+  <p id="passMatch"></p>
+  <button id="signUpBtn" class="btn btn-secondary">Sign Up</button> <br/> <br/>
+  Already have an account? <a href="./login.html">Sign in here</a>
+
+  <div id="status"></div>
 
   <!-- The core Firebase JS SDK is always required and must be listed first -->
   <script src="https://www.gstatic.com/firebasejs/6.2.2/firebase-app.js"></script>
@@ -70,7 +55,7 @@
     const database = firebase.firestore();
   </script>
 
-  <script src='public/JS/authIndex.js'></script>
+  <script src='../JS/authNewUser.js'></script>
   <!-- script src='public/JS/index.js'></script -->
 </body>
 </html>
