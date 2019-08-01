@@ -11,18 +11,23 @@
   <title>Pokémon Battle Assistant</title>
   <link rel="stylesheet" href="../CSS/login.css">
   <link rel="shortcut icon" type="image/png" href=".../favicon.ico"/>
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
 </head>
 
 <body>
-  <h1>Pokémon Battle Assistant</h1>
-  <br/>
-  <h3>Login</h3>
-  <hr/>
-  <br/>
-  Email: <input id="txtEmail" type="email" size="20"/> <br/> <br/>
-  Password: <input id="txtPassword" type="password" size="20"/> <br/> <br/>
-  <button id="loginBtn" class="btn btn-action">Login</button> <br/> <br/>
-  Don't have an account? <a href="./newUser.html">Sign up now</a>
+  <div class="parentDiv">
+      <div class="loginBox">
+        <center>
+          <h1>Pokémon Battle Assistant</h1>
+        </center>
+        <br/>
+        <input id="txtEmail" type="email" size="20" placeholder="Email"/> <br/> <br/>
+        <input id="txtPassword" type="password" placeholder="Password" size="20"/> <br/> <br/>
+        <p id="loginFailed"></p>
+        <button id="loginBtn" class="btn btn-action">Login</button> <br/> <br/>
+        Don't have an account? <a href="./newUser.html">Sign up now</a>
+      </div>
+  </div>
 
   <div id="status"></div>
 

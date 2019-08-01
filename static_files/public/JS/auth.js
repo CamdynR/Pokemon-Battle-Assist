@@ -31,10 +31,19 @@ loginBtn.addEventListener('click', e => {
 
   // Sign in
   auth.signInWithEmailAndPassword(email, pass).then(cred => {
+    loginFailed.innerHTML = "";
+    txtEmail.style.borderColor = "white";
+    txtPassword.style.borderColor = "white";
     console.log(cred);
     location.href = "../../index.html";
   }).catch(function(error) {
     // Handle Errors here.
+    txtEmail.style.borderColor = "rgb(220, 0, 0)";
+    txtPassword.style.borderColor = "rgb(220, 0, 0)";
+    loginFailed.innerHTML = "Incorrect Email or Password";
+    loginFailed.style.color = "rgb(220, 0, 0)";
+    loginFailed.style.marginTop = "5px";
+
     var errorCode = error.code;
     var errorMessage = error.message;
     console.log("Error Code: ", errorCode);

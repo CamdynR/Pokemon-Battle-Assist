@@ -20,7 +20,7 @@ signUpBtn.addEventListener('click', e => {
   e.preventDefault();
 
   if(txtPassword1.value != txtPassword2.value) {
-    passMatch.innerHTML = "The passwords do no match.";
+    passMatch.innerHTML = "The passwords do no match";
   } else {
     passMatch.innerHTML = "";
 

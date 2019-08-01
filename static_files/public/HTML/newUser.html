@@ -11,20 +11,24 @@
   <title>Pokémon Battle Assistant</title>
   <link rel="stylesheet" href="../CSS/login.css">
   <link rel="shortcut icon" type="image/png" href=".../favicon.ico"/>
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
 </head>
 
 <body>
-  <h1>Pokémon Battle Assistant</h1>
-  <br/>
-  <h3>Sign Up</h3>
-  <hr/>
-  <br/>
-  Email: <input id="txtEmail" type="email" size="20"/> <br/> <br/>
-  New Password: <input id="txtPassword1" type="password" size="20"/> <br/> <br/>
-  Repeat Password: <input id="txtPassword2" type="password" size="20"/> <br/> 
-  <p id="passMatch"></p>
-  <button id="signUpBtn" class="btn btn-secondary">Sign Up</button> <br/> <br/>
-  Already have an account? <a href="./login.html">Sign in here</a>
+  <div class="parentDiv">
+    <div class="loginBox">
+      <center>
+        <div id="PBAtitle"><h1>Pokémon Battle Assistant</h1></div>
+      </center>
+      <br/>
+      <input id="txtEmail" type="email" size="20" placeholder="Email"/> <br/> <br/>
+      <input id="txtPassword1" type="password" size="20" placeholder="New Password"/> <br/> <br/>
+      <input id="txtPassword2" type="password" size="20" placeholder="Repeat Password"/> <br/> 
+      <p id="passMatch"></p>
+      <button id="signUpBtn" class="btn btn-secondary">Sign Up</button> <br/> <br/>
+      Already have an account? <a href="./login.html">Sign in here</a>
+    </div>
+  </div>
 
   <div id="status"></div>
 
