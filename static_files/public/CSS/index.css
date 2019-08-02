@@ -1,0 +1,13 @@
+#partyPokemon {
+    border: 1px solid red;
+    border-radius: 20px;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 20px;
+    width: 300px;
+}
+
+li {
+    margin-left: -40px;
+    list-style-type: none;
+}

@@ -1,129 +1,134 @@
-html {
-  color: black;
-  background-image: linear-gradient(#74c5ff, #e3abff);
-  height: 100%;
-  font-family: 'Raleway', sans-serif;
-}
-
-body {
-  height: 100%;
-  margin: 0;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-}
-
-#PBAtitle {
-  width: 90%;
-  max-width: 390px;
-}
-
-.loginBox {
-  height: auto;
-  width: 80%;
-  max-width: 430px;
-  background-color: rgb(196,181,255,0.2);
-  border: 3.5px solid #7147ff;
-  border-radius: 20px;
-  display: inline-block;
-  padding-top: 20px;
-  padding-bottom: 40px;
-}
-
-@media screen and (max-width: 349px) {
-  .loginBox {
-    margin-top: 40px !important;
-  }
-}
-
-@media screen and (min-width: 350px) and (max-width: 525px) {
-  .loginBox {
-    margin-top: 60px;
-  }
-}
-
-@media screen and (min-width: 526px) and (max-height: 800px) {
-  .loginBox {
-    margin-top: 130px;
-  }
-}
-
-@media screen and (min-width: 526px) and (min-height: 801px) {
-  .loginBox {
-    margin-top: 430px;
-  }
-}
-  
-#txtEmail {
-  margin-top: 5px;
-}
-
-#txtPassword1 {
-  margin-top: -5px;
-  margin-bottom: -5px;
-}
-
-#txtPassword {
-  margin-top: -5px;
-  margin-bottom: -15px;
-}
-
-input {
-  width: 80%;
-  max-width: 250px;
-  height: 25px;
-  border-radius: 4px;
-  border: 1px solid white;
-  padding-left: 8px;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  font-size: 1.1rem;
-  color: black;
-}
-
-input::placeholder {
-  color: rgb(185, 185, 185);
-}
-
-input:focus {
-  outline: none !important;
-  border-color: #7147ff;
-}
-
-.parentDiv {
-  text-align: center;
-}
-
-#signUpBtn, #loginBtn {
-  background-color: #7147ff;
-  border-radius: 5px;
-  border: none;
-  color: white; 
-  font-size: 1.1rem;
-  height: 35px;
-  width: 80%;
-  max-width: 260px;
-  margin-bottom: 25px;
-  margin-top: 25px; 
-}
-
-#signUpBtn:focus, #loginBtn:focus {
-  outline: none;
-}
-
-#signUpBtn:hover, #loginBtn:hover {
-  background-color: #5826ff;
-}
-
-#signUpBtn:hover, #loginBtn:active {
-  background-color:#3e13c9;
-}
-
 a {
-  color: #3366BB;
-  text-decoration: none;
+    color: #3366BB;
+    text-decoration: none;
 }
 
 a:hover {
-  color: #3366BB;
-  text-decoration: underline;
+    color: #3366BB;
+    text-decoration: underline;
+}
+
+body {
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    height: 100%;
+    margin: 0;
+}
+
+html {
+    background-image: linear-gradient(#74c5ff, #e3abff);
+    color: black;
+    font-family: 'Raleway', sans-serif;
+    height: 100%;
+}
+
+#PBAtitle {
+    max-width: 390px;
+    width: 90%;
+}
+
+.loginBox {
+    border: 3.5px solid #7147ff;
+    background-color: rgb(196, 181, 255, 0.2);
+    border-radius: 20px;
+    display: inline-block;
+    height: auto;
+    max-width: 430px;
+    padding-top: 20px;
+    padding-bottom: 40px;
+    width: 80%;
+}
+
+@media screen and (max-width: 349px) {
+    .loginBox {
+        margin-top: 40px !important;
+    }
+}
+
+@media screen and (min-width: 350px) and (max-width: 525px) {
+    .loginBox {
+        margin-top: 60px;
+    }
+}
+
+@media screen and (min-width: 526px) and (max-height: 1024px) {
+    .loginBox {
+        margin-top: 130px;
+    }
+}
+
+@media screen and (min-width: 526px) and (min-height: 1025px) {
+    .loginBox {
+        margin-top: 430px;
+    }
+}
+
+#txtEmail {
+    margin-top: 5px;
+}
+
+#txtPassword1 {
+    margin-top: -5px;
+    margin-bottom: -5px;
+}
+
+#txtPassword {
+    margin-top: -5px;
+    margin-bottom: -15px;
+}
+
+input {
+    border: 1px solid white;
+    border-radius: 4px;
+    color: black;
+    font-size: 1.1rem;
+    height: 25px;
+    max-width: 250px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 8px;
+    width: 80%;
+}
+
+input::placeholder {
+    color: rgb(185, 185, 185);
+}
+
+input:focus {
+    border-color: #7147ff;
+    outline: none !important;
+}
+
+.parentDiv {
+    text-align: center;
+}
+
+#signUpBtn,
+#loginBtn {
+    background-color: #7147ff;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 1.1rem;
+    height: 35px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    max-width: 260px;
+    width: 80%;
+}
+
+#signUpBtn:focus,
+#loginBtn:focus {
+    outline: none;
+}
+
+#signUpBtn:hover,
+#loginBtn:hover {
+    background-color: #5826ff;
+}
+
+#signUpBtn:hover,
+#loginBtn:active {
+    background-color: #3e13c9;
 }
