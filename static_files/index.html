@@ -20,18 +20,36 @@
         <p>Logged in as: <b id="loginUser"></b></p>
         <h3>Your Pokémon</h3>
 
-        <div id="addPokemonBtn">Pokémon Name: <input id="nameBox" type="text" size="20" />
-            <button id="addParty">Add to Party</button></div>
+        <form class="addPokemon">
+            <div id="addPokemonBtn"><input id="nameBox" type="text" size="20" placeholder="Pokémon Name" />
+                <button type="submit" value="Submit" id="addParty">Add to Party</button></div>
+        </form>
         <br/>
-        <div id="delPokemonBtn">Pokémon Name: <input id="deleteNameBox" type="text" size="20" />
-            <button id="deleteParty">Delete from Party</button></div>
+        <form class="delPokemon">
+            <div id="delPokemonBtn"><input id="deleteNameBox" type="text" size="20" placeholder="Pokémon Name" />
+                <button type="submit" value="Submit" id="deleteParty">Delete from Party</button></div>
+        </form>
     </center>
 
-    <div id="partyPokemon">
-        <p>Pokémon in Party:</p>
-        <ul id="partyPokemonList">
-            <!-- li> Party Pokemon go here </li -->
-        </ul>
+    <div id="partyGrid">
+        <div id="partySlot1" class="partySlot">
+            <p id="pokemonName1" class="partyPokeName"></p>
+        </div>
+        <div id="partySlot2" class="partySlot">
+            <p id="pokemonName2" class="partyPokeName"></p>
+        </div>
+        <div id="partySlot3" class="partySlot">
+            <p id="pokemonName3" class="partyPokeName"></p>
+        </div>
+        <div id="partySlot4" class="partySlot">
+            <p id="pokemonName4" class="partyPokeName"></p>
+        </div>
+        <div id="partySlot5" class="partySlot">
+            <p id="pokemonName5" class="partyPokeName"></p>
+        </div>
+        <div id="partySlot6" class="partySlot">
+            <p id="pokemonName6" class="partyPokeName"></p>
+        </div>
     </div>
 
     <br/>
