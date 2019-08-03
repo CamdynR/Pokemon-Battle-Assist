@@ -11,9 +11,8 @@ auth.onAuthStateChanged(user => {
         });
     } else {
         console.log('User logged out');
-        setUpParty([]);
+        // setUpParty([]);
         if (!location.href.includes("newUser.html")) {
-            console.log("test");
             location.href = "/public/HTML/newUser.html";
         }
     }
@@ -24,15 +23,31 @@ const addPokemon = document.getElementById('addParty');
 const pokemonToAdd = document.getElementById('nameBox');
 addPokemon.addEventListener('click', (e) => {
     e.preventDefault();
-    db.collection('party').add({
-        first: pokemonToAdd.value,
-    }).then(() => {
-        console.log('Added', pokemonToAdd.value, 'to the party collection');
-        document.getElementById('nameBox').value = '';
-    }).catch(err => {
-        console.log(err.message);
+    const docRef = db.collection('users').doc(auth.currentUser.uid);
+    let docData = [];
+    docRef.get().then(function(doc) {
+        if (doc.exists) {
+            docData = doc.data();
+            let newArr = [];
+            for (let i = 0; i < docData['party'].length; i++) {
+                newArr.push(docData['party'][i]);
+            }
+            newArr.push(pokemonToAdd.value);
+            docRef.set({
+                party: newArr,
+            }).then(() => {
+                document.getElementById('nameBox').value = '';
+            }).catch(err => {
+                console.log(err.message);
+            });
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
+        setUpParty();
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
     });
-
 });
 
 const logoutBtnIndex = document.getElementById('logoutBtnIndex');
@@ -45,6 +60,7 @@ logoutBtnIndex.addEventListener('click', e => {
     auth.signOut().then(function() {
         // Sign-out successful.
         console.log("Successfully logged out");
+        location.href = "/public/HTML/newUser.html";
     }).catch(function(error) {
         // An error happened.
         console.log("Error: ", error);
