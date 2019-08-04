@@ -17,6 +17,8 @@ body {
 
 html {
     background-image: linear-gradient(#74c5ff, #e3abff);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
     color: black;
     font-family: 'Raleway', sans-serif;
     height: 100%;

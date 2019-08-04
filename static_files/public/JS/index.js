@@ -9,7 +9,7 @@ const setUpParty = (data) => {
                 const nextName = docData['party'][i];
                 const idName = 'pokemonName' + [i + 1];
                 const idSlot = 'partySlot' + [i + 1];
-                const xButton = `<button id="delBtn` + [i + 1] + `" class="xBtn">X</button>`;
+                const xButton = `<button id="delBtn` + [i + 1] + `" class="xBtn" onclick="delPokemon(` + [i + 1] + `)">X</button>`;
                 document.getElementById(idName).innerHTML = nextName;
                 if (!document.getElementById(idSlot).innerHTML.includes("button")) {
                     document.getElementById(idSlot).innerHTML += xButton;
@@ -69,49 +69,35 @@ addPokemon.addEventListener('click', (e) => {
     });
 });
 
-// Delete pokemon from party
-const idArray = [document.getElementById('delBtn1'),
-    document.getElementById('delBtn2'), document.getElementById('delBtn3'),
-    document.getElementById('delBtn4'), document.getElementById('delBtn5'),
-    document.getElementById('delBtn6')
-];
-const deletePokemon = document.getElementById('deleteParty');
-const pokemonToDelete = document.getElementById('deleteNameBox');
-idArray.forEach(function(elem) {
-    elem.addEventListener('click', (e) => {
-        e.preventDefault();
-        const docRef = db.collection('users').doc(auth.currentUser.uid);
-        let docData = [];
-        let hasDeleted = false;
-        docRef.get().then(function(doc) {
-            if (doc.exists) {
-                docData = doc.data();
-                let newArr = [];
-                for (let i = 0; i < docData['party'].length; i++) {
-                    if (docData['party'][i] != pokemonToDelete.value || hasDeleted) {
-                        newArr.push(docData['party'][i]);
-                    } else {
-                        hasDeleted = true;
-                    }
+// Delete Pokemon from Party
+function delPokemon(partyNum) {
+    let docData = [];
+    const docRef = db.collection('users').doc(auth.currentUser.uid);
+    docRef.get().then(function(doc) {
+        if (doc.exists) {
+            docData = doc.data();
+            let newArr = [];
+            for (let i = 0; i < docData['party'].length; i++) {
+                if (i + 1 != partyNum) {
+                    newArr.push(docData['party'][i]);
                 }
-                docRef.set({
-                    party: newArr,
-                }).then(() => {
-                    document.getElementById('nameBox').value = '';
-                }).catch(err => {
-                    console.log(err.message);
-                });
-            } else {
-                // doc.data() will be undefined in this case
-                console.log("No such document!");
             }
-            setUpParty();
-            pokemonToDelete.value = '';
-        }).catch(function(error) {
-            console.log("Error getting document:", error);
-        });
+            docRef.set({
+                party: newArr,
+            }).then(() => {
+                document.getElementById('nameBox').value = '';
+            }).catch(err => {
+                console.log(err.message);
+            });
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
+        setUpParty();
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
     });
-});
+}
 
 const getUsercred = (user) => {
     let username = document.getElementById('loginUser');

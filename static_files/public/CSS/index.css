@@ -1,3 +1,29 @@
+a {
+    color: #3366BB;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #3366BB;
+    text-decoration: underline;
+}
+
+body {
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    height: 100%;
+    margin: 0;
+}
+
+html {
+    background-image: linear-gradient(#74c5ff, #e3abff);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    color: black;
+    font-family: 'Raleway', sans-serif;
+    height: 100%;
+}
+
 #partyGrid {
     margin: 0 auto;
     display: grid;
@@ -14,7 +40,9 @@
 }
 
 .partySlot {
-    background-color: rgb(150, 165, 248);
+    border: 3.5px solid #7147ff;
+    background-color: rgb(196, 181, 255, 0.2);
+    border-radius: 20px;
     height: 200px;
 }
 
@@ -30,17 +58,18 @@
 }
 
 .xBtn {
-    background-color: rgb(150, 165, 248);
+    background-color: rgb(196, 181, 255, 0);
     border: none;
     color: red;
     font-size: 1.4rem;
-    margin-left: 173px;
+    margin-left: 163px;
     position: absolute;
-    margin-top: -211px;
+    margin-top: -208px;
 }
 
 .xBtn:hover {
     color: darkred;
+    cursor: pointer;
 }
 
 .xBtn:active {
