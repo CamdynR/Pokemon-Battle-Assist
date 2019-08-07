@@ -1,14 +1,12 @@
 // Listen for auth status changes
-/*
 auth.onAuthStateChanged(user => {
-    if (user) {
+    if (user && user.emailVerified()) {
         console.log('User logged in: ', user);
-        location.href = "/index.html";
+        location.href = "../../index.html";
     } else {
-        console.log('User logged out');
+        console.log('Please verify email address');
     }
 });
-*/
 
 const txtEmail = document.getElementById('txtEmail');
 const txtPassword1 = document.getElementById('txtPassword1');
@@ -42,8 +40,17 @@ signUpBtn.addEventListener('click', e => {
             // console.log("Error Code: ", errorCode);
             // console.log("Error Message: ", errorMessage);
         }).then(() => {
-            console.log("testphrase");
-            location.href = "../../index.html";
+            verifyWithEmail();
         });
     }
 });
+
+// Send email verification
+function verifyWithEmail() {
+    var user = auth.currentUser;
+    user.sendEmailVerification().then(function() {
+        console.log('Email was sent');
+    }).catch(function(error) {
+        console.log(error.message);
+    });
+}

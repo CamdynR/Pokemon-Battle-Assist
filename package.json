@@ -1,18 +1,17 @@
 {
-  "name": "pokemon-battle-assistant",
-  "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
-  "scripts": {
-    "start": "node server.js"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "express": "^4.16.3",
-    "express-favicon": "^2.0.1",
-    "firebase": "^6.2.2",
-    "firebase-admin": "^8.2.0",
-    "jquery-csv": "^1.0.5"
-  }
+    "name": "pokemon-battle-assistant",
+    "version": "1.0.0",
+    "description": "",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.16.3",
+        "express-favicon": "^2.0.1",
+        "firebase": "^6.2.2",
+        "firebase-admin": "^8.2.0",
+    }
 }
