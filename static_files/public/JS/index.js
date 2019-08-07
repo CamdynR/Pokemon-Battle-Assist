@@ -1,83 +1,111 @@
-// (function() {
-
-  /*
-  // jQuery convention for running when the document has been fully loaded:
-  $(document).ready(() => {
-    const database = firebase.database();
-
-    $('#resetButton').click(() => {
-      console.log('Resetting the database');
-
-      database.ref('users/').remove(); // delete the entire collection
-
-      // writes data to the database:
-      database.ref('users/Philip').set({job: 'professor', pet: 'cat.jpg'});
-      database.ref('users/John').set({job: 'student',   pet: 'dog.jpg'});
-      database.ref('users/Carol').set({job: 'engineer',  pet: 'bear.jpg'});
-    });
-
-    // use .on('value' to get notified in real-time whenever anyone
-    // on the internet updates your database. cool!
-    database.ref('users/').on('value', (snapshot) => {
-      const allUsers = snapshot.val();
-      console.log('users/ changed:', allUsers);
-      if (allUsers) {
-        $('#status').html(''); // clear the HTML
-        $('#status').append('List of users:');
-        Object.keys(allUsers).forEach((name) => {
-          $('#status').append('<li>' + name + ' ' + allUsers[name].job + ' ' + allUsers[name].pet + '</li>');
-        });
-      }
-    });
-
-    $('#readButton').click(() => {
-      const key = 'users/' + $('#nameBox').val();
-
-      // 'once' reads the value once from the database
-      database.ref(key).once('value', (snapshot) => {
-        const data = snapshot.val();
-
-        console.log('You received some data!', data);
-        if (!data) {
-          // clear the display
-          $('#jobDiv').html('');
-          $('#petImage').attr('src', '').attr('width', '0px');
-          $('#status').html('Error: could not find user: ' + key);
-          return;
-        }
-
-        if (data.job && data.pet) {
-          $('#jobDiv').html('My job is ' + data.job);
-          $('#petImage').attr('src', data.pet).attr('width', '300px');
+// Set Up Party Pokemon
+const partyList = document.getElementById('partyPokemonList');
+const setUpParty = (data) => {
+    const docRef = db.collection('users').doc(auth.currentUser.uid);
+    docRef.get().then(function(doc) {
+        if (doc.exists) {
+            docData = doc.data();
+            for (let i = 0; i < docData['party'].length; i++) {
+                const nextName = docData['party'][i];
+                const idName = 'pokemonName' + [i + 1];
+                const idSlot = 'partySlot' + [i + 1];
+                const xButton = `<button id="delBtn` + [i + 1] + `" class="xBtn" onclick="delPokemon(` + [i + 1] + `)">X</button>`;
+                document.getElementById(idName).innerHTML = nextName;
+                if (!document.getElementById(idSlot).innerHTML.includes("button")) {
+                    document.getElementById(idSlot).innerHTML += xButton;
+                }
+            }
+            for (let i = docData['party'].length; i < 6; i++) {
+                const idName = 'pokemonName' + [i + 1];
+                document.getElementById(idName).innerHTML = '';
+                const idSlot = 'partySlot' + [i + 1];
+                if (document.getElementById('delBtn' + [i + 1])) {
+                    document.getElementById('delBtn' + [i + 1]).remove();
+                }
+            }
         } else {
-          // clear the display
-          $('#jobDiv').html('');
-          $('#petImage').attr('src', '').attr('width', '0px');
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
         }
-      });
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
     });
+}
 
-    $('#allUsersButton').click(() => {
-      database.ref('users/').once('value', (snapshot) => {
-        const data = snapshot.val();
-        console.log('You received some data!', data);
-        $('#status').html('All users: ' + Object.keys(data));
-      });
+// Add Pokemon to Party
+const addPokemon = document.getElementById('addParty');
+const pokemonToAdd = document.getElementById('nameBox');
+addPokemon.addEventListener('click', (e) => {
+    e.preventDefault();
+    const docRef = db.collection('users').doc(auth.currentUser.uid);
+    let docData = [];
+    docRef.get().then(function(doc) {
+        if (doc.exists) {
+            docData = doc.data();
+            let newArr = [];
+            if (docData['party'].length == 6) {
+                console.log("Party is full");
+                pokemonToAdd.value = '';
+                return;
+            }
+            for (let i = 0; i < docData['party'].length; i++) {
+                newArr.push(docData['party'][i]);
+            }
+            newArr.push(pokemonToAdd.value);
+            docRef.set({
+                party: newArr,
+            }).then(() => {
+                document.getElementById('nameBox').value = '';
+            }).catch(err => {
+                console.log(err.message);
+            });
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
+        setUpParty();
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
     });
+});
 
-    $('#insertButton').click(() => {
-      const name = $('#insertNameBox').val();
-      database.ref('users/' + name).set({
-        job: $('#insertJobBox').val(),
-        pet: $('#insertPetBox').val()
-      });
+// Delete Pokemon from Party
+function delPokemon(partyNum) {
+    let docData = [];
+    const docRef = db.collection('users').doc(auth.currentUser.uid);
+    docRef.get().then(function(doc) {
+        if (doc.exists) {
+            docData = doc.data();
+            let newArr = [];
+            for (let i = 0; i < docData['party'].length; i++) {
+                if (i + 1 != partyNum) {
+                    newArr.push(docData['party'][i]);
+                }
+            }
+            docRef.set({
+                party: newArr,
+            }).then(() => {
+                document.getElementById('nameBox').value = '';
+            }).catch(err => {
+                console.log(err.message);
+            });
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
+        setUpParty();
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
     });
+}
 
-    $('#deleteButton').click(() => {
-      const name = $('#deleteNameBox').val();
-      database.ref('users/' + name).remove();
-    });
-  });
-  */
-
-// }());
+const getUsercred = (user) => {
+    let username = document.getElementById('loginUser');
+    let email = user.email;
+    let name = email.substring(0, email.lastIndexOf("@"));
+    if (user) {
+        username.innerHTML = name;
+    } else {
+        username.innerHTML = '';
+    }
+}

@@ -2,75 +2,95 @@
 <!DOCTYPE html>
 
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <script src="jquery-3.3.1.min.js"></script>
 
-  <title>Pokémon Battle Assistant</title>
-  <link rel="stylesheet" href="public/CSS/index.css">
-  <link rel="shortcut icon" type="image/png" href="favicon.ico"/>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="jquery-3.3.1.min.js"></script>
+
+    <title>Pokémon Battle Assistant</title>
+    <link rel="stylesheet" href="public/CSS/index.css">
+    <link rel="shortcut icon" type="image/png" href="favicon.ico" />
+    <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
 </head>
 
 <body>
-  <h1>Pokémon Battle Assistant</h1>
+    <center>
+        <h1>Pokémon Battle Assistant</h1>
+        <p>Logged in as: <b id="loginUser"></b></p>
+        <h3>Your Pokémon</h3>
 
-  <button id="resetButton">Reset Party</button>
-  <button id="resetButton">Reset Opponent</button>
-  <hr/>
+        <form class="addPokemon">
+            <div id="addPokemonBtn"><input id="nameBox" type="text" size="20" placeholder="Pokémon Name" />
+                <button type="submit" value="Submit" id="addParty">Add to Party</button></div>
+        </form>
+        <br/>
+        <form class="delPokemon">
+            <div id="delPokemonBtn"><input id="deleteNameBox" type="text" size="20" placeholder="Pokémon Name" />
+                <button type="submit" value="Submit" id="deleteParty">Opponent Pokemon</button></div>
+        </form>
+    </center>
 
-  <h3>Your Pokémon</h3>
+    <div id="partyGrid">
+        <div id="partySlot1" class="partySlot">
+            <p id="pokemonName1" class="partyPokeName"></p>
+        </div>
+        <div id="partySlot2" class="partySlot">
+            <p id="pokemonName2" class="partyPokeName"></p>
+        </div>
+        <div id="partySlot3" class="partySlot">
+            <p id="pokemonName3" class="partyPokeName"></p>
+        </div>
+        <div id="partySlot4" class="partySlot">
+            <p id="pokemonName4" class="partyPokeName"></p>
+        </div>
+        <div id="partySlot5" class="partySlot">
+            <p id="pokemonName5" class="partyPokeName"></p>
+        </div>
+        <div id="partySlot6" class="partySlot">
+            <p id="pokemonName6" class="partyPokeName"></p>
+        </div>
+    </div>
 
-  <hr/>
-  Pokémon Name: <input id="nameBox" type="text" size="20"/>
-  <button id="addParty">Add to Party</button>
+    <br/>
+    <br/>
+    <center>
+        <button id="logoutBtnIndex" class="btn btn-action hide">Logout</button>
+    </center>
 
-  <div id="jobDiv"></div>
-  <img id="petImage"></img>
 
-  <hr/>
-  Pokémon Name: <input id="deleteNameBox" type="text" size="20"/>
-  <button id="deleteParty">Delete from Party</button>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/6.2.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.2/firebase-firestore.js"></script>
 
-  <hr/>
-  <h3>Opponent Pokémon</h3>
-
-  <hr/>
-  Pokémon Name: <input id="deleteNameBox" type="text" size="20"/>
-  <button id="makeOpponent">Make Opponent</button>
-
-  <br/>
-  <button id="logoutBtnIndex" class="btn btn-action hide">Logout</button>
-
-  <!-- The core Firebase JS SDK is always required and must be listed first -->
-  <script src="https://www.gstatic.com/firebasejs/6.2.2/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/6.2.2/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/6.2.2/firebase-firestore.js"></script>
-
-  <!-- TODO: Add SDKs for Firebase products that you want to use
+    <!-- TODO: Add SDKs for Firebase products that you want to use
       https://firebase.google.com/docs/web/setup#config-web-app -->
 
-  <script>
-    // Your web app's Firebase configuration
-    var firebaseConfig = {
-      apiKey: "AIzaSyDF2xs2yu9BzBJnmX7myf7jr9X5uao6GNQ",
-      authDomain: "pokemon-battle-assist-db.firebaseapp.com",
-      databaseURL: "https://pokemon-battle-assist-db.firebaseio.com",
-      projectId: "pokemon-battle-assist-db",
-      // storageBucket: "pokemon-battle-assist-db.appspot.com",
-      // messagingSenderId: "182570572787",
-      appId: "1:182570572787:web:8b45f539913b26ef"
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyDF2xs2yu9BzBJnmX7myf7jr9X5uao6GNQ",
+            authDomain: "pokemon-battle-assist-db.firebaseapp.com",
+            databaseURL: "https://pokemon-battle-assist-db.firebaseio.com",
+            projectId: "pokemon-battle-assist-db",
+            // storageBucket: "pokemon-battle-assist-db.appspot.com",
+            // messagingSenderId: "182570572787",
+            appId: "1:182570572787:web:8b45f539913b26ef"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
 
-    // Make auth and firestore references
-    const auth = firebase.auth();
-    const database = firebase.firestore();
-  </script>
+        // Make auth and firestore references
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+    </script>
 
-  <script src='public/JS/authIndex.js'></script>
-  <!-- script src='public/JS/index.js'></script -->
+    <script src='public/JS/authIndex.js'></script>
+    <script src='public/JS/index.js'></script>
+    <script src="jquery-csv.js"></script>
+    <script src='public/JS/pokemon.js'></script>
 </body>
+
 </html>
