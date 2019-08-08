@@ -39,6 +39,7 @@ addPokemon.addEventListener('click', (e) => {
     e.preventDefault();
     const docRef = db.collection('users').doc(auth.currentUser.uid);
     let docData = [];
+
     docRef.get().then(function(doc) {
         if (doc.exists) {
             docData = doc.data();
