@@ -35,22 +35,31 @@ html {
     justify-content: center;
 }
 
-.delPokemon {
+.oppPokemon {
     margin-bottom: 20px;
 }
 
-.partySlot {
+.partySlot,
+#opponentPokemon {
     border: 3.5px solid #7147ff;
     background-color: rgb(196, 181, 255, 0.2);
     border-radius: 20px;
     height: 200px;
 }
 
-.partySlot:hover {
+#opponentPokemon {
+    position: absolute;
+    margin-left: 25px;
+    width: 200px;
+}
+
+.partySlot:hover,
+#opponentPokemon {
     filter: brightness(110%);
 }
 
-.partyPokeName {
+.partyPokeName,
+#opponentName {
     color: white;
     text-align: center;
     margin-top: 160px;
@@ -67,6 +76,10 @@ html {
     margin-top: -208px;
 }
 
+.partySlot:hover~.xBtn {
+    visibility: hidden;
+}
+
 .xBtn:hover {
     color: darkred;
     cursor: pointer;
@@ -79,4 +92,20 @@ html {
 .xBtn:focus {
     outline: none;
     border: none;
+}
+
+.pokemonImage {
+    margin-left: 12px;
+    width: 165px;
+    position: absolute;
+}
+
+#opponentImage {
+    margin-left: -84px;
+    width: 165px;
+    position: absolute;
+}
+
+#moveBox1 {
+    margin-top: 5px;
 }

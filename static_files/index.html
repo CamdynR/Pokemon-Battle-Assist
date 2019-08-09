@@ -17,38 +17,57 @@
 
 <body>
     <center>
+        <div id="opponentPokemon">
+            <img src="" id="opponentImage" />
+            <p id="opponentName"></p>
+        </div>
+        <p id="validOpponent" style="color: red"></p>
         <h1>Pokémon Battle Assistant</h1>
         <p>Logged in as: <b id="loginUser"></b></p>
         <h3>Your Pokémon</h3>
+        <p id="validPokemon" style="color: red"></p>
 
-        <form class="addPokemon">
-            <div id="addPokemonBtn"><input id="nameBox" type="text" size="20" placeholder="Pokémon Name" />
-                <button type="submit" value="Submit" id="addParty">Add to Party</button></div>
+        <form autocomplete="off" class="addPokemon">
+            <div id="addPokemonBtn">
+                <input id="nameBox" type="text" size="20" placeholder="Pokémon Name" /><br>
+                <p id="validMove" style="color: red"></p>
+                <input id="moveBox1" class="moveBox" type="text" size="20" placeholder="First Move" /><br>
+                <input id="moveBox2" class="moveBox" type="text" size="20" placeholder="Second Move" /><br>
+                <input id="moveBox3" class="moveBox" type="text" size="20" placeholder="Third Move" /><br>
+                <input id="moveBox4" class="moveBox" type="text" size="20" placeholder="Fourth Move" /><br>
+                <button type="submit" value="Submit" id="addParty">Add to Party</button>
+            </div>
         </form>
         <br/>
-        <form class="delPokemon">
-            <div id="delPokemonBtn"><input id="deleteNameBox" type="text" size="20" placeholder="Pokémon Name" />
-                <button type="submit" value="Submit" id="deleteParty">Opponent Pokemon</button></div>
+        <form autocomplete="off" class="oppPokemon">
+            <div id="opponentPokemonBtn"><input id="opponentNameBox" type="text" size="20" placeholder="Pokémon Name" /><br>
+                <button type="submit" value="Submit" id="opponentParty">Opponent Pokemon</button></div>
         </form>
     </center>
 
     <div id="partyGrid">
         <div id="partySlot1" class="partySlot">
+            <img src="" id="pokemonImage1" class="pokemonImage" />
             <p id="pokemonName1" class="partyPokeName"></p>
         </div>
         <div id="partySlot2" class="partySlot">
+            <img src="" id="pokemonImage2" class="pokemonImage" />
             <p id="pokemonName2" class="partyPokeName"></p>
         </div>
         <div id="partySlot3" class="partySlot">
+            <img src="" id="pokemonImage3" class="pokemonImage" />
             <p id="pokemonName3" class="partyPokeName"></p>
         </div>
         <div id="partySlot4" class="partySlot">
+            <img src="" id="pokemonImage4" class="pokemonImage" />
             <p id="pokemonName4" class="partyPokeName"></p>
         </div>
         <div id="partySlot5" class="partySlot">
+            <img src="" id="pokemonImage5" class="pokemonImage" />
             <p id="pokemonName5" class="partyPokeName"></p>
         </div>
         <div id="partySlot6" class="partySlot">
+            <img src="" id="pokemonImage6" class="pokemonImage" />
             <p id="pokemonName6" class="partyPokeName"></p>
         </div>
     </div>
@@ -64,6 +83,7 @@
     <script src="https://www.gstatic.com/firebasejs/6.2.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.2.2/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.2.2/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.2/firebase-database.js"></script>
 
     <!-- TODO: Add SDKs for Firebase products that you want to use
       https://firebase.google.com/docs/web/setup#config-web-app -->
@@ -89,8 +109,10 @@
 
     <script src='public/JS/authIndex.js'></script>
     <script src='public/JS/index.js'></script>
-    <script src='public/JS/pokemon.js'></script>
+    <script src='Pokemon_Data/pokemon_names.js'></script>
+    <script src='Pokemon_Data/pokemon_moves.js'></script>
     <script type="text/javascript" src="Pokemon_Data/pokemon.json"></script>
+    <script type="text/javascript" src="Pokemon_Data/pokemon_numbers.json"></script>
 </body>
 
 </html>

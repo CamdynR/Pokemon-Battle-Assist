@@ -31,7 +31,7 @@ signUpBtn.addEventListener('click', e => {
         // Create new user
         auth.createUserWithEmailAndPassword(email, pass).then(cred => {
             return db.collection('users').doc(cred.user.uid).set({
-                party: []
+                party: {}
             });
             // }).catch(function(error) {
             // Handle Errors here.
