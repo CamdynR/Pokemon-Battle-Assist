@@ -1,56 +1,43 @@
 // Listen for auth status changes
 auth.onAuthStateChanged(user => {
-    if (user && user.emailVerified()) {
+    if (user) {
         console.log('User logged in: ', user);
         location.href = "../../index.html";
     } else {
-        console.log('Please verify email address');
+        console.log('Please log in');
     }
 });
 
-const txtEmail = document.getElementById('txtEmail');
-const txtPassword1 = document.getElementById('txtPassword1');
-const txtPassword2 = document.getElementById('txtPassword2');
-const signUpBtn = document.getElementById('signUpBtn');
-const passMatch = document.getElementById('passMatch');
-
-// Create a new user
-signUpBtn.addEventListener('click', e => {
+// Create new Google User
+googleSignInBtn.addEventListener('click', e => {
+    console.log("google sign in");
     // Keep the page from refreshing when clicked
     e.preventDefault();
 
-    if (txtPassword1.value != txtPassword2.value) {
-        passMatch.innerHTML = "The passwords do no match";
-    } else {
-        passMatch.innerHTML = "";
+    var provider = new firebase.auth.GoogleAuthProvider();
 
-        // Get email and pass
-        const email = txtEmail.value;
-        const pass = txtPassword1.value;
+    auth.signInWithPopup(provider).then(function(result) {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        var token = result.credential.accessToken;
+        // The signed-in user info.
+        var user = result.user;
+        console.log(user);
 
-        // Create new user
-        auth.createUserWithEmailAndPassword(email, pass).then(cred => {
-            return db.collection('users').doc(cred.user.uid).set({
-                party: {}
-            });
-            // }).catch(function(error) {
-            // Handle Errors here.
-            // var errorCode = error.code;
-            // var errorMessage = error.message;
-            // console.log("Error Code: ", errorCode);
-            // console.log("Error Message: ", errorMessage);
-        }).then(() => {
-            verifyWithEmail();
+        var email = user.email;
+        console.log(email);
+
+        return db.collection('users').doc(user.uid).set({
+            party: {}
         });
-    }
-});
 
-// Send email verification
-function verifyWithEmail() {
-    var user = auth.currentUser;
-    user.sendEmailVerification().then(function() {
-        console.log('Email was sent');
     }).catch(function(error) {
-        console.log(error.message);
+
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        var email = error.email;
+        var credential = error.credential;
+
+        console.log(errorMessage);
     });
-}
+
+});

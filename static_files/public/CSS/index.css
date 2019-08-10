@@ -115,6 +115,7 @@ html {
     margin-top: 5px;
 }
 .moveList {
+    width: 150px;
     margin-top: -20px;
     color: white;
     position: absolute;
