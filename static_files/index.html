@@ -18,12 +18,19 @@
 <body>
     <center>
         <div id="opponentPokemon">
+            <p id="opponentWord" style="color: red;">OPPONENT</p>
             <img src="" id="opponentImage" />
             <p id="opponentName"></p>
+        </div>
+        <div id="pokemonAnswer">
+            <img src="" id="answerImage" />
+            <p id="answerName" class="answerText"></p>
+            <p id="answerMove" class="answerText"></p>
         </div>
         <p id="validOpponent" style="color: red"></p>
         <h1>Pokémon Battle Assistant</h1>
         <p>Logged in as: <b id="loginUser"></b></p>
+        <button id="logoutBtnIndex" class="btn btn-action hide">Logout</button>
         <h3>Your Pokémon</h3>
         <p id="validPokemon" style="color: red"></p>
 
@@ -49,35 +56,64 @@
         <div id="partySlot1" class="partySlot">
             <img src="" id="pokemonImage1" class="pokemonImage" />
             <p id="pokemonName1" class="partyPokeName"></p>
+            <ol id="poke1moves" class="moveList">
+                <li id="poke1move1" class="pokemonMove"></li>
+                <li id="poke1move2" class="pokemonMove"></li>
+                <li id="poke1move3" class="pokemonMove"></li>
+                <li id="poke1move4" class="pokemonMove"></li>
+            </ol>
         </div>
         <div id="partySlot2" class="partySlot">
             <img src="" id="pokemonImage2" class="pokemonImage" />
             <p id="pokemonName2" class="partyPokeName"></p>
+            <ol id="poke2moves" class="moveList">
+                <li id="poke2move1" class="pokemonMove"></li>
+                <li id="poke2move2" class="pokemonMove"></li>
+                <li id="poke2move3" class="pokemonMove"></li>
+                <li id="poke2move4" class="pokemonMove"></li>
+            </ol>
         </div>
         <div id="partySlot3" class="partySlot">
             <img src="" id="pokemonImage3" class="pokemonImage" />
             <p id="pokemonName3" class="partyPokeName"></p>
+            <ol id="poke3moves" class="moveList">
+                <li id="poke3move1" class="pokemonMove"></li>
+                <li id="poke3move2" class="pokemonMove"></li>
+                <li id="poke3move3" class="pokemonMove"></li>
+                <li id="poke3move4" class="pokemonMove"></li>
+            </ol>
         </div>
         <div id="partySlot4" class="partySlot">
             <img src="" id="pokemonImage4" class="pokemonImage" />
             <p id="pokemonName4" class="partyPokeName"></p>
+            <ol id="poke4moves" class="moveList">
+                <li id="poke4move1" class="pokemonMove"></li>
+                <li id="poke4move2" class="pokemonMove"></li>
+                <li id="poke4move3" class="pokemonMove"></li>
+                <li id="poke4move4" class="pokemonMove"></li>
+            </ol>
         </div>
         <div id="partySlot5" class="partySlot">
             <img src="" id="pokemonImage5" class="pokemonImage" />
             <p id="pokemonName5" class="partyPokeName"></p>
+            <ol id="poke5moves" class="moveList">
+                <li id="poke5move1" class="pokemonMove"></li>
+                <li id="poke5move2" class="pokemonMove"></li>
+                <li id="poke5move3" class="pokemonMove"></li>
+                <li id="poke5move4" class="pokemonMove"></li>
+            </ol>
         </div>
         <div id="partySlot6" class="partySlot">
             <img src="" id="pokemonImage6" class="pokemonImage" />
             <p id="pokemonName6" class="partyPokeName"></p>
+            <ol id="poke6moves" class="moveList">
+                <li id="poke6move1" class="pokemonMove"></li>
+                <li id="poke6move2" class="pokemonMove"></li>
+                <li id="poke6move3" class="pokemonMove"></li>
+                <li id="poke6move4" class="pokemonMove"></li>
+            </ol>
         </div>
     </div>
-
-    <br/>
-    <br/>
-    <center>
-        <button id="logoutBtnIndex" class="btn btn-action hide">Logout</button>
-    </center>
-
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/6.2.2/firebase-app.js"></script>
@@ -109,10 +145,12 @@
 
     <script src='public/JS/authIndex.js'></script>
     <script src='public/JS/index.js'></script>
+    <script src='public/JS/pokemon.js'></script>
     <script src='Pokemon_Data/pokemon_names.js'></script>
     <script src='Pokemon_Data/pokemon_moves.js'></script>
     <script type="text/javascript" src="Pokemon_Data/pokemon.json"></script>
     <script type="text/javascript" src="Pokemon_Data/pokemon_numbers.json"></script>
+    <script type="text/javascript" src="Pokemon_Data/move_types_power.json"></script>
 </body>
 
 </html>

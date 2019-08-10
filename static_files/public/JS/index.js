@@ -25,6 +25,14 @@ const setUpParty = (data) => {
                 if (!document.getElementById(idSlot).innerHTML.includes("button")) {
                     document.getElementById(idSlot).innerHTML += xButton;
                 }
+                const slotName = document.getElementById('partySlot' + [i + 1]);
+                slotName.style.visibility = "visible";
+
+                // Add moves to Pokemon Slots
+                for (let j = 0; j < 4; j++) {
+                    const currMove = docData['party'][i][nextName][j];
+                    document.getElementById('poke' + (i + 1) + 'move' + (j + 1)).innerHTML = currMove;
+                }
             }
 
             // Make empty slots blank
@@ -37,6 +45,8 @@ const setUpParty = (data) => {
                 if (document.getElementById('delBtn' + [i + 1])) {
                     document.getElementById('delBtn' + [i + 1]).remove();
                 }
+                const slotName = document.getElementById('partySlot' + [i + 1]);
+                slotName.style.visibility = "hidden";
             }
 
             // Add Opponent Pokemon to slot
@@ -47,6 +57,9 @@ const setUpParty = (data) => {
                 document.getElementById('opponentName').innerHTML = oppName;
                 document.getElementById('opponentImage').src = imgSrc;
             }
+
+            // Choose the best move
+            chooseMove();
         } else {
             // doc.data() will be undefined in this case
             console.log("No such document!");
@@ -94,6 +107,9 @@ addPokemon.addEventListener('click', (e) => {
             }
         }
     }
+
+    document.getElementById("validPokemon").innerHTML = "";
+    document.getElementById("validMove").innerHTML = "";
 
     docRef.get().then(function(doc) {
         if (doc.exists) {

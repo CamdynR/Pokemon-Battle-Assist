@@ -1,14 +1,10 @@
 // Listen for auth status changes
 auth.onAuthStateChanged(user => {
     if (user) {
-        // console.log('User logged in: ', user);
-        // Get Data
-        db.collection('party').onSnapshot(snapshot => {
-            setUpParty(snapshot.docs);
-            getUsercred(user);
-        }, err => {
-            console.log(err.message);
-        });
+        // Set up the party once logged in
+        console.log('User logged in');
+        getUsercred(user);
+        setUpParty();
     } else {
         console.log('User logged out');
         // setUpParty([]);
