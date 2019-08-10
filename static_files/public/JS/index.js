@@ -206,10 +206,8 @@ function delPokemon(partyNum) {
 
 const getUsercred = (user) => {
     let username = document.getElementById('loginUser');
-    let email = user.email;
-    let name = email.substring(0, email.lastIndexOf("@"));
     if (user) {
-        username.innerHTML = name;
+        username.innerHTML = user.displayName;
     } else {
         username.innerHTML = '';
     }

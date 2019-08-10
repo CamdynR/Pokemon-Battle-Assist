@@ -56,58 +56,31 @@ html {
     text-align: center;
 }
 
-#googleSignInBtn {
+#googleSignInBtn,
+#facebookSignInBtn {
     background: none;
     border: none;
 }
 
-#googleSignInBtn img {
+#googleSignInBtn img,
+#facebookSignInBtn img {
     width: 250px;
 }
 
-#googleSignInBtn img:hover {
+#googleSignInBtn img:hover,
+#facebookSignInBtn img:hover {
     cursor: pointer;
     box-shadow: 0px 0px 7px #4285f4;
 }
 
 #googleSignInBtn:focus,
-#googleSignInBtn:active {
+#googleSignInBtn:active,
+#facebookSignInBtn:focus,
+#facebookSignInBtn:active {
     outline: none;
     border: none;
 }
 
-
-/*#googleSignInBtn {
-    background-color: #4285f4;
-    border-radius: 2px;
-    border: none;
-    color: white;
-    cursor: pointer;
-    font-family: 'Roboto', sans-serif;
-    font-size: 1.1rem;
-    height: 45px;
-    margin-top: 1px;
-    margin-bottom: 15px;
-    max-width: 260px;
-    width: 80%;
+#facebookSignInBtn {
+    margin-top: 30px;
 }
-
-#googleSignInBtn:hover {
-    box-shadow: 0px 0px 7px #4285f4;
-    ;
-}
-
-#googleImg {
-    border-radius: 2px;
-    width: 43px;
-    float: left;
-    margin-top: 0px;
-    margin-left: -5px;
-}
-
-#googleTxt {
-    position: absolute;
-    margin-left: 65px;
-    margin-top: 10px;
-}
-*/
