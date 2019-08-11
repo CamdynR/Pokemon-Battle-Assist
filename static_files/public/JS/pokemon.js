@@ -14,98 +14,99 @@ function chooseMove() {
     const docRef = db.collection('users').doc(auth.currentUser.uid);
     docRef.get().then(function(doc) {
         if (doc.exists) {
-
             // Get the moves and their types
             docData = doc.data();
-            for (let i = 0; i < docData['party'].length; i++) {
-                const nextName = Object.keys(docData['party'][i])[0];
-                for (let j = 0; j < 4; j++) {
-                    const currMove = docData['party'][i][nextName][j];
-                    if (currMove != "" && moveTypes[1][currMove] != "Status") {
-                        const type = moveTypes[0][currMove];
-                        const powerAndMove = {};
-                        powerAndMove[moveTypes[2][currMove]] = currMove;
-                        if (type in moveList) {
-                            moveList[type].push(powerAndMove);
-                        } else {
-                            moveList[type] = [powerAndMove];
+            if (Object.keys(docData['party']).length > 0 && docData['opponent']) {
+                for (let i = 0; i < docData['party'].length; i++) {
+                    const nextName = Object.keys(docData['party'][i])[0];
+                    for (let j = 0; j < 4; j++) {
+                        const currMove = docData['party'][i][nextName][j];
+                        if (currMove != "" && moveTypes[1][currMove] != "Status") {
+                            const type = moveTypes[0][currMove];
+                            const powerAndMove = {};
+                            powerAndMove[moveTypes[2][currMove]] = currMove;
+                            if (type in moveList) {
+                                moveList[type].push(powerAndMove);
+                            } else {
+                                moveList[type] = [powerAndMove];
+                            }
+                            listOfTypes.push(type);
                         }
-                        listOfTypes.push(type);
                     }
                 }
-            }
 
-            // Get which types are super effective
-            const oppName = docData['opponent'];
-            const oppNum = pokemonNumbers[oppName] - 1;
-            for (var key in data[oppNum]) {
-                if (key != "name" && key != "pokedex_number") {
-                    if (data[oppNum][key] == 4) {
-                        var typeWeak = key.substr(8);
-                        typeWeak = typeWeak.charAt(0).toUpperCase() + typeWeak.slice(1);
-                        ultraEffectiveTypes.push(typeWeak);
-                    } else if (data[oppNum][key] == 2) {
-                        var typeWeak = key.substr(8);
-                        typeWeak = typeWeak.charAt(0).toUpperCase() + typeWeak.slice(1);
-                        superEffectiveTypes.push(typeWeak);
-                    } else if (data[oppNum][key] == 1) {
-                        var typeWeak = key.substr(8);
-                        typeWeak = typeWeak.charAt(0).toUpperCase() + typeWeak.slice(1);
-                        regEffectiveTypes.push(typeWeak);
-                    } else if (data[oppNum][key] == 0.5) {
-                        var typeWeak = key.substr(8);
-                        typeWeak = typeWeak.charAt(0).toUpperCase() + typeWeak.slice(1);
-                        notEffectiveTypes.push(typeWeak);
-                    } else {
-                        var typeWeak = key.substr(8);
-                        typeWeak = typeWeak.charAt(0).toUpperCase() + typeWeak.slice(1);
-                        superNotEffectiveTypes.push(typeWeak);
+                // Get which types are super effective
+                const oppName = docData['opponent'];
+                const oppNum = pokemonNumbers[oppName] - 1;
+                for (var key in data[oppNum]) {
+                    if (key != "name" && key != "pokedex_number") {
+                        if (data[oppNum][key] == 4) {
+                            var typeWeak = key.substr(8);
+                            typeWeak = typeWeak.charAt(0).toUpperCase() + typeWeak.slice(1);
+                            ultraEffectiveTypes.push(typeWeak);
+                        } else if (data[oppNum][key] == 2) {
+                            var typeWeak = key.substr(8);
+                            typeWeak = typeWeak.charAt(0).toUpperCase() + typeWeak.slice(1);
+                            superEffectiveTypes.push(typeWeak);
+                        } else if (data[oppNum][key] == 1) {
+                            var typeWeak = key.substr(8);
+                            typeWeak = typeWeak.charAt(0).toUpperCase() + typeWeak.slice(1);
+                            regEffectiveTypes.push(typeWeak);
+                        } else if (data[oppNum][key] == 0.5) {
+                            var typeWeak = key.substr(8);
+                            typeWeak = typeWeak.charAt(0).toUpperCase() + typeWeak.slice(1);
+                            notEffectiveTypes.push(typeWeak);
+                        } else {
+                            var typeWeak = key.substr(8);
+                            typeWeak = typeWeak.charAt(0).toUpperCase() + typeWeak.slice(1);
+                            superNotEffectiveTypes.push(typeWeak);
+                        }
                     }
                 }
-            }
 
-            // See if there are any ultra effective moves
-            const ultraEffective = findEffectiveMove(ultraEffectiveTypes, listOfTypes, moveList);
-            if (ultraEffective != "") { finalMovePick = ultraEffective }
+                // See if there are any ultra effective moves
+                const ultraEffective = findEffectiveMove(ultraEffectiveTypes, listOfTypes, moveList);
+                if (ultraEffective != "") { finalMovePick = ultraEffective }
 
-            // See if there are any super effective moves
-            if (finalMovePick == "") {
-                const superEffective = findEffectiveMove(superEffectiveTypes, listOfTypes, moveList);
-                if (superEffective != "") { finalMovePick = superEffective }
-            }
+                // See if there are any super effective moves
+                if (finalMovePick == "") {
+                    const superEffective = findEffectiveMove(superEffectiveTypes, listOfTypes, moveList);
+                    if (superEffective != "") { finalMovePick = superEffective }
+                }
 
-            // See if there are any regularly effective moves
-            if (finalMovePick == "") {
-                const regEffective = findEffectiveMove(regEffectiveTypes, listOfTypes, moveList);
-                if (regEffective != "") { finalMovePick = regEffective }
-            }
+                // See if there are any regularly effective moves
+                if (finalMovePick == "") {
+                    const regEffective = findEffectiveMove(regEffectiveTypes, listOfTypes, moveList);
+                    if (regEffective != "") { finalMovePick = regEffective }
+                }
 
-            // See if there are any not effective moves
-            if (finalMovePick == "") {
-                const notEffective = findEffectiveMove(notEffectiveTypes, listOfTypes, moveList);
-                if (notEffective != "") { finalMovePick = notEffective }
-            }
+                // See if there are any not effective moves
+                if (finalMovePick == "") {
+                    const notEffective = findEffectiveMove(notEffectiveTypes, listOfTypes, moveList);
+                    if (notEffective != "") { finalMovePick = notEffective }
+                }
 
-            // See if there are any super not effective moves
-            if (finalMovePick == "") {
-                const superNotEffective = findEffectiveMove(superNotEffectiveTypes, listOfTypes, moveList);
-                if (superNotEffective != "") { finalMovePick = superNotEffective }
-            }
+                // See if there are any super not effective moves
+                if (finalMovePick == "") {
+                    const superNotEffective = findEffectiveMove(superNotEffectiveTypes, listOfTypes, moveList);
+                    if (superNotEffective != "") { finalMovePick = superNotEffective }
+                }
 
-            for (let i = 0; i < docData['party'].length; i++) {
-                const nextName = Object.keys(docData['party'][i])[0];
-                for (let j = 0; j < 4; j++) {
-                    if (docData['party'][i][nextName][j] == finalMovePick) {
-                        finalPokemonPick = nextName;
-                        break;
+                for (let i = 0; i < docData['party'].length; i++) {
+                    const nextName = Object.keys(docData['party'][i])[0];
+                    for (let j = 0; j < 4; j++) {
+                        if (docData['party'][i][nextName][j] == finalMovePick) {
+                            finalPokemonPick = nextName;
+                            break;
+                        }
                     }
                 }
-            }
 
-            const answerImg = "Pokemon_Images/" + pokemonNumbers[finalPokemonPick] + ".png";
-            document.getElementById('answerImage').src = answerImg;
-            document.getElementById('answerName').innerHTML = finalPokemonPick;
-            document.getElementById('answerMove').innerHTML = finalMovePick;
+                const answerImg = "Pokemon_Images/" + pokemonNumbers[finalPokemonPick] + ".png";
+                document.getElementById('answerImage').src = answerImg;
+                document.getElementById('answerName').innerHTML = finalPokemonPick;
+                document.getElementById('answerMove').innerHTML = finalMovePick;
+            }
         } else {
             // doc.data() will be undefined in this case
             console.log("No such document!");

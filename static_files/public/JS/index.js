@@ -36,7 +36,7 @@ const setUpParty = (data) => {
             }
 
             // Make empty slots blank
-            for (let i = docData['party'].length; i < 6; i++) {
+            for (let i = Object.keys(docData['party']).length; i < 6; i++) {
                 const idName = 'pokemonName' + [i + 1];
                 const idImg = 'pokemonImage' + [i + 1];
                 document.getElementById(idName).innerHTML = '';
@@ -51,7 +51,7 @@ const setUpParty = (data) => {
 
             // Add Opponent Pokemon to slot
             // console.log(docData['opponent']);
-            if (docData['opponent'] != '') {
+            if (docData['opponent']) {
                 const oppName = docData['opponent'];
                 const imgSrc = "Pokemon_Images/" + pokemonNumbers[oppName] + ".png";
                 document.getElementById('opponentName').innerHTML = oppName;
@@ -60,9 +60,17 @@ const setUpParty = (data) => {
 
             // Choose the best move
             chooseMove();
+
+            // Remove move choice if party is empty
+            document.getElementById('answerImage').src = "";
+            document.getElementById('answerName').innerHTML = "";
+            document.getElementById('answerMove').innerHTML = "";
         } else {
             // doc.data() will be undefined in this case
-            console.log("No such document!");
+            // console.log("No such document!");
+            db.collection('users').doc(auth.currentUser.uid).set({
+                party: {}
+            });
         }
     }).catch(function(error) {
         console.log("Error getting document:", error);
