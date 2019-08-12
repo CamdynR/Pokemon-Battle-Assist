@@ -96,12 +96,28 @@ const setUpParty = (data) => {
             const editPartyBtn = document.getElementById('editParty');
             if (docData['party'].length < 6 && editPartyBtn.innerHTML != "<h3>Edit Party</h3>") {
                 partyParent.style.display = "inline-block";
-                partyParent.style.gridColumn = (docData['party'].length + 1);
-                partyParent.style.gridRow = 1;
+                // Screen Media Query
+                if (screen.width > 1011) {
+                    partyParent.style.gridColumn = (docData['party'].length + 1);
+                    partyParent.style.gridRow = 1;
+                } else {
+                    let tempCol = (docData['party'].length + 1) % 3;
+                    if (tempCol == 0) {
+                        tempCol = 3;
+                    }
+                    partyParent.style.gridColumn = tempCol;
+                    partyParent.style.gridRow = (Math.floor(docData['party'].length / 3)) + 1;
+                }
                 document.getElementById('nameBox').focus();
             } else {
-                partyParent.style.gridColumn = 1;
-                partyParent.style.gridRow = 2;
+                // Screen Media Query
+                if (screen.width > 1011) {
+                    partyParent.style.gridColumn = 1;
+                    partyParent.style.gridRow = 2;
+                } else {
+                    partyParent.style.gridColumn = 1;
+                    partyParent.style.gridRow = 3;
+                }
                 partyParent.style.display = "none";
             }
         } else {
