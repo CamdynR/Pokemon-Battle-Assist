@@ -12,121 +12,404 @@ body {
     background-attachment: fixed;
     background-repeat: no-repeat;
     height: 100%;
-    margin: 0;
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 0;
 }
 
 html {
-    background-image: linear-gradient(#74c5ff, #e3abff);
+    background-image: linear-gradient(#F4F4F4, #DCD0C0);
     background-attachment: fixed;
     background-repeat: no-repeat;
-    color: black;
+    color: #373737;
     font-family: 'Raleway', sans-serif;
-    height: 100%;
+    height: 90%;
 }
 
 #partyGrid {
     margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(auto-fit, 200px);
-    max-width: 800px;
+    grid-template-columns: repeat(auto-fit, 135px);
+    max-width: 920px;
     width: 90%;
-    height: 400px;
+    height: 200px;
     grid-gap: 20px;
     justify-content: center;
 }
 
 .oppPokemon {
+    margin-left: 345px;
     margin-bottom: 20px;
+}
+
+#opponentWord {
+    color: white;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+#opponentName {
+    color: white;
+    font-size: 1.5rem;
+    visibility: visible;
+    margin: 0 auto;
 }
 
 .partySlot,
 #opponentPokemon,
 #pokemonAnswer {
-    border: 3.5px solid #7147ff;
-    background-color: rgb(196, 181, 255, 0.2);
+    /*border: 3.5px solid #7147ff;*/
+    border: 3.5px solid #373737;
+    background-color: #373737;
     border-radius: 20px;
 }
 
 .partySlot {
-    height: 280px;
+    height: 200px;
+}
+
+#title {
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+
+#vs {
+    position: absolute;
+    margin-left: 260px;
+    margin-top: 116px;
+}
+
+#pokemonBattle {
+    height: 250px;
+    width: 550px;
+    margin: 0 auto;
+    text-align: center;
 }
 
 #opponentPokemon {
-    position: absolute;
-    margin-left: 25px;
+    float: right;
     width: 200px;
     height: 240px;
+    margin-bottom: 10px;
 }
 
 #pokemonAnswer {
-    position: absolute;
-    margin-left: 245px;
+    /*position: absolute;
+    margin-left: 245px;*/
+    float: left;
     width: 200px;
     height: 240px;
 }
 
-
-}
-.partySlot:hover,
-#opponentPokemon {
-    filter: brightness(110%);
-}
-.partyPokeName,
-#opponentName {
+.partyPokeName {
     color: white;
     text-align: center;
-    margin-top: 160px;
-    font-size: 1.5rem;
+    margin-top: 91px;
+    margin-bottom: 16px;
+    font-size: 1.2rem;
 }
+
 .xBtn {
     background-color: rgb(196, 181, 255, 0);
     border: none;
     color: red;
     font-size: 1.4rem;
-    margin-left: 163px;
+    margin-left: 103px;
     position: absolute;
-    margin-top: -208px;
+    margin-top: -127px;
+    visibility: hidden;
 }
+
 .partySlot:hover~.xBtn {
     visibility: hidden;
 }
+
 .xBtn:hover {
     color: darkred;
     cursor: pointer;
 }
+
 .xBtn:active {
     color: black;
 }
+
 .xBtn:focus {
     outline: none;
     border: none;
 }
+
 .pokemonImage {
-    margin-left: 12px;
-    width: 165px;
+    background-color: #C0B283;
+    border-radius: 4px;
+    margin-top: 4px;
+    margin-left: 22px;
+    width: 83px;
     position: absolute;
 }
+
 #opponentImage {
-    margin-left: -84px;
+    /*margin-left: -84px;*/
+    background-color: #C0B283;
+    border-radius: 4px;
+    margin-top: 0px;
+    margin-bottom: 7px;
     width: 165px;
-    position: absolute;
+    /*position: absolute;*/
 }
+
 #moveBox1 {
     margin-top: 5px;
 }
+
 .moveList {
-    width: 150px;
-    margin-top: -20px;
+    width: 95px;
+    margin-top: -10px;
+    margin-left: -15px;
+    font-size: 0.9rem;
     color: white;
     position: absolute;
 }
+
+#loginUser {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+#logoutBtnIndex {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0);
+    border: 1.5px solid #373737;
+    border-radius: 5px;
+    top: 38px;
+    font-size: 1.1rem;
+    right: 10px;
+    width: 88px;
+    height: 30px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+#logoutBtnIndex:hover {
+    background-color: #373737;
+    color: white;
+    cursor: pointer;
+}
+
+#addPokeGrid {
+    visibility: hidden;
+}
+
+
+/*
+#addForm {
+    visibility: hidden;
+}
+*/
+
+.titleAndSignout,
+.yourPokemon {
+    text-align: center;
+}
+
+.titleAndSignout {
+    margin-top: 30px;
+}
+
+.yourPokemonParent {
+    margin-top: 100px;
+    width: 100%;
+}
+
+.yourPokemon {
+    width: 380px;
+    margin: 0 auto;
+}
+
+.yourPokemon h3 {
+    margin: 0;
+    float: left;
+}
+
+#yourPokemonTeam {
+    margin-left: 35px;
+    margin-bottom: 30px;
+}
+
+#editParty {
+    margin-left: -15px;
+    margin-top: -3px;
+    background-color: rgb(255, 255, 255, 0);
+    border: 1.5px solid #373737;
+    border-radius: 5px;
+    height: 30px;
+    width: 90px;
+    transition: all 0.3s ease;
+    padding: 0 auto;
+    color: #373737;
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.9rem;
+    text-align: center !important;
+    justify-content: center;
+}
+
+#editParty:hover {
+    background-color: #373737;
+    color: white;
+    cursor: pointer;
+}
+
+#editParty:focus,
+#editParty:active,
+#nameBox:focus,
+#nameBox:active,
+.moveBox:focus,
+.moveBox:active,
+#addPokemonBtn:focus,
+#addPokemonBtn:active {
+    outline: none;
+}
+
+#nameBox:focus,
+#nameBox:active,
+.moveBox:focus,
+.moveBox:active,
+#addPokemonBtn:focus,
+#addPokemonBtn:active {
+    box-shadow: 0 0 3pt 1pt #373737;
+}
+
+#editPartyParent {
+    margin-top: 25px !important;
+    text-align: center;
+    display: "none";
+}
+
+#answerName {
+    margin-top: -3px;
+    margin-bottom: 0px;
+}
+
+#answerMove {
+    margin-bottom: 0px;
+}
+
 #answerName {
     font-size: 1.5rem;
 }
+
 #answerImage {
+    background-color: #C0B283;
+    border-radius: 4px;
+    margin-top: 0px;
     width: 165px;
 }
+
 .answerText {
     color: white;
-    margin-top: -9px;
+    margin-top: 0px;
+}
+
+#tempTxt {
+    color: white;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+#opponentNameBox {
+    border: none;
+    border-radius: 5px;
+    color: #373737;
+    font-size: 1.1rem;
+    padding-left: 10px;
+    width: 192px;
+    height: 30px;
+}
+
+#opponentNameBox:focus,
+#opponentNameBox:active {
+    outline: none;
+}
+
+#opponentParty {
+    visibility: hidden;
+}
+
+#nameBox {
+    border: none;
+    border-radius: 5px;
+    color: #373737;
+    font-size: 1.1rem;
+    padding-top: 2px;
+    padding-left: 10px;
+    width: 163px;
+    height: 25px;
+    font-family: 'Raleway', sans-serif;
+}
+
+#nameBox::placeholder,
+.moveBox::placeholder {
+    font-size: 1rem;
+    color: #474747;
+}
+
+.moveBox {
+    border: none;
+    border-radius: 5px;
+    color: #373737;
+    font-size: 1.1rem;
+    padding-top: 2px;
+    padding-left: 10px;
+    width: 163px;
+    height: 25px;
+    margin-bottom: 3px;
+    font-family: 'Raleway', sans-serif;
+}
+
+#addPokemonBtn {
+    margin-top: -20px;
+}
+
+#addParty {
+    background-color: #373737;
+    color: white;
+    font-family: 'Raleway', sans-serif;
+    font-size: 1.1rem;
+    border: 1.5px solid #373737;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    margin-left: 26px;
+    width: 120px;
+}
+
+#addParty:hover {
+    background-color: white;
+    border: 1.5px solid white;
+    color: #373737;
+    cursor: pointer;
+}
+
+#moveBox1 {
+    margin-top: -4px;
+}
+
+#moveBox4 {
+    margin-bottom: 9px;
+}
+
+#validOpponent {
+    margin-top: 8px;
+    margin-left: -24px;
+    width: 250px;
+}
+
+#validMove {
+    margin-left: 0px;
+    width: 170px;
+}
+
+#validPokemon {
+    margin-left: 0px;
+    width: 170px;
 }

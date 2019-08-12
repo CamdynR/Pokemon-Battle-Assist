@@ -26,13 +26,21 @@ const setUpParty = (data) => {
                     document.getElementById(idSlot).innerHTML += xButton;
                 }
                 const slotName = document.getElementById('partySlot' + [i + 1]);
-                slotName.style.visibility = "visible";
+                // slotName.style.visibility = "visible";
+                slotName.style.display = "inline-block";
+                document.getElementById("delBtn" + [i + 1]).style.visibility = "visible";
 
                 // Add moves to Pokemon Slots
+                let linesToAdd = 0;
                 for (let j = 0; j < 4; j++) {
                     const currMove = docData['party'][i][nextName][j];
                     document.getElementById('poke' + (i + 1) + 'move' + (j + 1)).innerHTML = currMove;
+                    linesToAdd += Math.floor((currMove.length / 13));
                 }
+
+                // Extend Slot Length for move height
+                idSlotHeight = document.getElementById(idSlot);
+                idSlotHeight.style.height = 195 + (17 * linesToAdd) + "px";
             }
 
             // Make empty slots blank
@@ -46,11 +54,11 @@ const setUpParty = (data) => {
                     document.getElementById('delBtn' + [i + 1]).remove();
                 }
                 const slotName = document.getElementById('partySlot' + [i + 1]);
-                slotName.style.visibility = "hidden";
+                // slotName.style.visibility = "hidden";
+                slotName.style.display = "none";
             }
 
             // Add Opponent Pokemon to slot
-            // console.log(docData['opponent']);
             if (docData['opponent']) {
                 const oppName = docData['opponent'];
                 const imgSrc = "Pokemon_Images/" + pokemonNumbers[oppName] + ".png";
@@ -65,9 +73,39 @@ const setUpParty = (data) => {
             document.getElementById('answerImage').src = "";
             document.getElementById('answerName').innerHTML = "";
             document.getElementById('answerMove').innerHTML = "";
+
+            // Add the X button if editing
+            if (editParty.innerHTML == "Done Editing") {
+                const xBtn = document.getElementsByClassName("xBtn");
+                for (let i = 0; i < xBtn.length; i++) {
+                    xBtn[i].style.visibility = "visible";
+                }
+            }
+
+            // Hide the X if not editing
+            if (document.getElementById('editParty').innerHTML == "<h3>Edit Party</h3>") {
+                const xBtn = document.getElementsByClassName("xBtn");
+                for (let i = 0; i < xBtn.length; i++) {
+                    xBtn[i].style.visibility = "hidden";
+                }
+            }
+
+            // Moves the Add Pokemon input
+            const partyParent = document.getElementById('editPartyParent');
+            const addForm = document.getElementById('addForm');
+            const editPartyBtn = document.getElementById('editParty');
+            if (docData['party'].length < 6 && editPartyBtn.innerHTML != "<h3>Edit Party</h3>") {
+                partyParent.style.display = "inline-block";
+                partyParent.style.gridColumn = (docData['party'].length + 1);
+                partyParent.style.gridRow = 1;
+                document.getElementById('nameBox').focus();
+            } else {
+                partyParent.style.gridColumn = 1;
+                partyParent.style.gridRow = 2;
+                partyParent.style.display = "none";
+            }
         } else {
             // doc.data() will be undefined in this case
-            // console.log("No such document!");
             db.collection('users').doc(auth.currentUser.uid).set({
                 party: {}
             });
@@ -212,6 +250,7 @@ function delPokemon(partyNum) {
     });
 }
 
+// Displays the current User's name in the upper right
 const getUsercred = (user) => {
     let username = document.getElementById('loginUser');
     if (user) {
@@ -220,3 +259,26 @@ const getUsercred = (user) => {
         username.innerHTML = '';
     }
 }
+
+// Adds the input form for new pokemon when clicked
+document.getElementById('editParty');
+editParty.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    setUpParty();
+    if (editParty.innerHTML == "<h3>Edit Party</h3>") {
+        editParty.innerHTML = "<h3 style=\"margin-left:16px;\">Done</h3>";
+
+        const xBtn = document.getElementsByClassName("xBtn");
+        for (let i = 0; i < xBtn.length; i++) {
+            xBtn[i].style.visibility = "visible";
+        }
+    } else {
+        editParty.innerHTML = "<h3>Edit Party</h3>";
+
+        const xBtn = document.getElementsByClassName("xBtn");
+        for (let i = 0; i < xBtn.length; i++) {
+            xBtn[i].style.visibility = "hidden";
+        }
+    }
+});

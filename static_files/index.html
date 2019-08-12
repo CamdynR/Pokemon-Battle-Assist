@@ -16,42 +16,47 @@
 </head>
 
 <body>
-    <center>
-        <div id="opponentPokemon">
-            <p id="opponentWord" style="color: red;">OPPONENT</p>
-            <img src="" id="opponentImage" />
-            <p id="opponentName"></p>
-        </div>
+    <!-- Main Title, Username, and Sign Out button -->
+    <div class="titleAndSignout">
+        <h1 id="title">Pokémon Battle Assistant</h1>
+        <p><b id="loginUser"></b></p>
+        <button id="logoutBtnIndex" class="btn btn-action hide">Logout</button>
+    </div>
+
+    <!-- Chosen User Pokemon and Opponent's Pokemon -->
+    <div id="pokemonBattle">
+        <!-- Chosen User Pokemon -->
         <div id="pokemonAnswer">
+            <p id="tempTxt">CHOOSE NEXT</p>
             <img src="" id="answerImage" />
             <p id="answerName" class="answerText"></p>
             <p id="answerMove" class="answerText"></p>
         </div>
-        <p id="validOpponent" style="color: red"></p>
-        <h1>Pokémon Battle Assistant</h1>
-        <p>Logged in as: <b id="loginUser"></b></p>
-        <button id="logoutBtnIndex" class="btn btn-action hide">Logout</button>
-        <h3>Your Pokémon</h3>
-        <p id="validPokemon" style="color: red"></p>
-
-        <form autocomplete="off" class="addPokemon">
-            <div id="addPokemonBtn">
-                <input id="nameBox" type="text" size="20" placeholder="Pokémon Name" /><br>
-                <p id="validMove" style="color: red"></p>
-                <input id="moveBox1" class="moveBox" type="text" size="20" placeholder="First Move" /><br>
-                <input id="moveBox2" class="moveBox" type="text" size="20" placeholder="Second Move" /><br>
-                <input id="moveBox3" class="moveBox" type="text" size="20" placeholder="Third Move" /><br>
-                <input id="moveBox4" class="moveBox" type="text" size="20" placeholder="Fourth Move" /><br>
-                <button type="submit" value="Submit" id="addParty">Add to Party</button>
-            </div>
-        </form>
-        <br/>
+        <h1 id="vs">vs.</h1>
+        <!-- Opponent's Pokemon -->
+        <div id="opponentPokemon">
+            <p id="opponentWord">OPPONENT</p>
+            <img src="" id="opponentImage" />
+            <p id="opponentName"></p>
+        </div>
+        <!-- Form to change opponent's Pokemon -->
         <form autocomplete="off" class="oppPokemon">
-            <div id="opponentPokemonBtn"><input id="opponentNameBox" type="text" size="20" placeholder="Pokémon Name" /><br>
-                <button type="submit" value="Submit" id="opponentParty">Opponent Pokemon</button></div>
+            <div id="opponentPokemonBtn"><input id="opponentNameBox" type="text" size="20" placeholder="Opponent Pokémon" spellcheck="false" />
+                <p id="validOpponent" style="color: red"></p>
+                <br>
+                <button type="submit" value="Submit" id="opponentParty">Change Opponent</button></div>
         </form>
-    </center>
+    </div>
 
+    <!-- User's Pokemon Team Title -->
+    <div class="yourPokemonParent">
+        <div class="yourPokemon">
+            <h3 id="yourPokemonTeam">Your Pokémon Team&nbsp;&nbsp;&nbsp;-</h3>
+            <button type="submit" value="Submit" id="editParty"><h3>Edit Party</h3></button>
+        </div>
+    </div>
+
+    <!-- User's Pokemon Team -->
     <div id="partyGrid">
         <div id="partySlot1" class="partySlot">
             <img src="" id="pokemonImage1" class="pokemonImage" />
@@ -113,6 +118,20 @@
                 <li id="poke6move4" class="pokemonMove"></li>
             </ol>
         </div>
+        <div id="editPartyParent">
+            <form autocomplete="off" class="addPokemon" id="addForm">
+                <div id="addPokemonBtn">
+                    <input id="nameBox" type="text" size="20" placeholder="Pokémon Name" spellcheck="false" /><br>
+                    <p id="validPokemon" style="color: red"></p>
+                    <p id="validMove" style="color: red"></p>
+                    <input id="moveBox1" class="moveBox" type="text" size="20" placeholder="First Move" spellcheck="false" /><br>
+                    <input id="moveBox2" class="moveBox" type="text" size="20" placeholder="Second Move" spellcheck="false" /><br>
+                    <input id="moveBox3" class="moveBox" type="text" size="20" placeholder="Third Move" spellcheck="false" /><br>
+                    <input id="moveBox4" class="moveBox" type="text" size="20" placeholder="Fourth Move" spellcheck="false" /><br>
+                    <button type="submit" value="Submit" id="addParty">Add to Party</button>
+                </div>
+            </form>
+        </div>
     </div>
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
@@ -137,7 +156,6 @@
         };
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
-
         // Make auth and firestore references
         const auth = firebase.auth();
         const db = firebase.firestore();

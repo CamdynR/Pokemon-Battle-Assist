@@ -105,7 +105,8 @@ function chooseMove() {
                 const answerImg = "Pokemon_Images/" + pokemonNumbers[finalPokemonPick] + ".png";
                 document.getElementById('answerImage').src = answerImg;
                 document.getElementById('answerName').innerHTML = finalPokemonPick;
-                document.getElementById('answerMove').innerHTML = finalMovePick;
+                document.getElementById('answerMove').innerHTML = "Move:  " +
+                    finalMovePick;
             }
         } else {
             // doc.data() will be undefined in this case
