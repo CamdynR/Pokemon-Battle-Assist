@@ -83,6 +83,11 @@ input:focus {
     margin-bottom: 40px;
 }
 
+#titleMobile {
+    display: none;
+    margin-top: 3px;
+}
+
 #vs {
     position: absolute;
     margin-left: 260px;
@@ -390,8 +395,51 @@ input:focus {
 
 /* Media Queries Below */
 
-@media only screen and (max-width: 1012px) {
+@media only screen and (max-width: 1025px) {
     #partyGrid {
         max-width: 460px;
     }
 }
+
+@media only screen and (max-height: 701px) {
+    body {
+        height: 90%;
+        margin-top: -40px;
+        transform: scale(0.9) !important;
+    }
+    #loginUser,
+    #logoutBtnIndex {
+        margin-top: -23px;
+        margin-right: -75px;
+        transform: scale(1) !important;
+    }
+}
+
+@media only screen and (max-height: 701px) and (max-width: 1025px) {
+    #loginUser,
+    #logoutBtnIndex {
+        margin-top: -24px;
+        margin-right: -45px;
+    }
+}
+
+@media only screen and (min-width: 1012px) and (max-width: 1024px) {
+    .yourPokemonParent {
+        margin-bottom: 24px;
+    }
+    #partyGrid {
+        position: absolute;
+        margin-left: 27.25%;
+    }
+}
+
+@media only screen and (max-width: 750px) {
+    #title {
+        display: none;
+    }
+    #titleMobile {
+        display: inline-block;
+    }
+}
+
+@media only screen and (max-width: 625) {}

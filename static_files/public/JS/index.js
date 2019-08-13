@@ -97,7 +97,7 @@ const setUpParty = (data) => {
             if (docData['party'].length < 6 && editPartyBtn.innerHTML != "<h3>Edit Party</h3>") {
                 partyParent.style.display = "inline-block";
                 // Screen Media Query
-                if (screen.width > 1011) {
+                if (screen.width > 1023) {
                     partyParent.style.gridColumn = (docData['party'].length + 1);
                     partyParent.style.gridRow = 1;
                 } else {
@@ -111,7 +111,7 @@ const setUpParty = (data) => {
                 document.getElementById('nameBox').focus();
             } else {
                 // Screen Media Query
-                if (screen.width > 1011) {
+                if (screen.width > 1023) {
                     partyParent.style.gridColumn = 1;
                     partyParent.style.gridRow = 2;
                 } else {
@@ -277,7 +277,7 @@ const getUsercred = (user) => {
 }
 
 // Adds the input form for new pokemon when clicked
-document.getElementById('editParty');
+// document.getElementById('editParty');
 editParty.addEventListener('click', (e) => {
     e.preventDefault();
 
