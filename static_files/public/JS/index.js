@@ -35,7 +35,11 @@ const setUpParty = (data) => {
                 for (let j = 0; j < 4; j++) {
                     const currMove = docData['party'][i][nextName][j];
                     document.getElementById('poke' + (i + 1) + 'move' + (j + 1)).innerHTML = currMove;
-                    linesToAdd += Math.floor((currMove.length / 13));
+                    if(!currMove.includes(" ")) {
+                        linesToAdd += Math.floor((currMove.length / 13));
+                    } else {
+                        linesToAdd += Math.floor((currMove.length / 12));
+                    }
                 }
 
                 // Extend Slot Length for move height

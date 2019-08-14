@@ -83,11 +83,6 @@ input:focus {
     margin-bottom: 40px;
 }
 
-#titleMobile {
-    display: none;
-    margin-top: 3px;
-}
-
 #vs {
     position: absolute;
     margin-left: 260px;
@@ -392,6 +387,9 @@ input:focus {
     width: 170px;
 }
 
+#mobileMenuBtn {
+    display: none;
+}
 
 /* Media Queries Below */
 
@@ -435,10 +433,18 @@ input:focus {
 
 @media only screen and (max-width: 750px) {
     #title {
+        margin-top: 50px;
+    }
+    #loginUser, 
+    #logoutBtnIndex {
         display: none;
     }
-    #titleMobile {
+    #mobileMenuBtn {
         display: inline-block;
+        float: right;
+        margin-top: -122px;
+        margin-right: 5px;
+        width: 40px;
     }
 }
 
