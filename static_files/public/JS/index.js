@@ -281,7 +281,7 @@ const getUsercred = (user) => {
 }
 
 // Adds the input form for new pokemon when clicked
-// document.getElementById('editParty');
+const editParty = document.getElementById('editParty');
 editParty.addEventListener('click', (e) => {
     e.preventDefault();
 
@@ -300,5 +300,46 @@ editParty.addEventListener('click', (e) => {
         for (let i = 0; i < xBtn.length; i++) {
             xBtn[i].style.visibility = "hidden";
         }
+    }
+});
+
+
+// Makes the menu pop-down for the hamburger menu
+const menuButton = document.getElementById('mobileMenuBtn');
+menuButton.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    const mobileParent = document.getElementById('mobileMenuParent');
+    const loginUser = document.getElementById('loginUser');
+    const logoutBtnIndex = document.getElementById('logoutBtnIndex');
+    if(mobileParent.style.height == "50px" || mobileParent.style.height == "") {
+        mobileParent.style.height = "120px";
+        menuButton.style.marginTop = "68px";
+        loginUser.style.display = "inline-block";
+        logoutBtnIndex.style.display = "inline-block";
+    } else {
+        mobileParent.style.height = "50px";
+        menuButton.style.marginTop = "0px";
+        loginUser.style.display = "none";
+        logoutBtnIndex.style.display = "none";
+    }
+
+    var scroll = $(window).scrollTop();
+    if($("#mobileMenuParent").hasClass("active") && scroll == 0) {
+        $("#mobileMenuParent").removeClass("active");
+    } else {
+        $("#mobileMenuParent").addClass("active");
+    }
+});
+
+// Add dropshadow to mobile header when scrolled
+$(window).scroll(function() {     
+    var scroll = $(window).scrollTop();
+    const mobileParent = document.getElementById('mobileMenuParent');
+    if (scroll > 0) {
+        $("#mobileMenuParent").addClass("active");
+    }
+    else if(scroll == 0 && mobileParent.style.height != "120px") {
+        $("#mobileMenuParent").removeClass("active");
     }
 });

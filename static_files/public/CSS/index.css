@@ -81,6 +81,7 @@ input:focus {
 #title {
     margin-top: 30px;
     margin-bottom: 40px;
+    transition: all 0.3s ease;
 }
 
 #vs {
@@ -176,14 +177,15 @@ input:focus {
 }
 
 #loginUser {
-    position: absolute;
+    position: fixed;
     font-size: 1.1rem;
     top: 10px;
     right: 10px;
+    transition: all 0.3s ease;
 }
 
 #logoutBtnIndex {
-    position: absolute;
+    position: fixed;
     background-color: rgba(255, 255, 255, 0);
     border: 1.5px solid #373737;
     border-radius: 5px;
@@ -389,6 +391,37 @@ input:focus {
 
 #mobileMenuBtn {
     display: none;
+    /*float: right;*/
+    margin-right: 10px;
+    transition: all 0.2s ease;
+    position: fixed; /* Set the navbar to fixed position */
+    top: 5px; /* Position the navbar at the top of the page */
+    right: 5px;
+}
+
+#mobileMenuParent {
+    display: none;
+    position: fixed; /* Set the navbar to fixed position */
+    top: 0; /* Position the navbar at the top of the page */
+    background-color: rgb(255,255,255,0);
+    transition: all 0.2s ease;
+    left: 0;
+    height: 50px;
+    width: 100%;
+    /*transition: backgroundColor 0.3s ease;*/
+}
+
+.menuBtn {
+    border-radius: 10px;
+    width: 30px;
+    height: 5px;
+    background-color: #464646;
+    margin: 6px 0;
+}
+
+.active {
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);   
+    background-color: #F4F4F4 !important;
 }
 
 /* Media Queries Below */
@@ -396,28 +429,6 @@ input:focus {
 @media only screen and (max-width: 1025px) {
     #partyGrid {
         max-width: 460px;
-    }
-}
-
-@media only screen and (max-height: 701px) {
-    body {
-        height: 90%;
-        margin-top: -40px;
-        transform: scale(0.9) !important;
-    }
-    #loginUser,
-    #logoutBtnIndex {
-        margin-top: -23px;
-        margin-right: -75px;
-        transform: scale(1) !important;
-    }
-}
-
-@media only screen and (max-height: 701px) and (max-width: 1025px) {
-    #loginUser,
-    #logoutBtnIndex {
-        margin-top: -24px;
-        margin-right: -45px;
     }
 }
 
@@ -433,19 +444,56 @@ input:focus {
 
 @media only screen and (max-width: 750px) {
     #title {
-        margin-top: 50px;
+        margin-top: 60px;
+    }
+    .titleAndSignout {
+        margin-top: -15px;
     }
     #loginUser, 
     #logoutBtnIndex {
         display: none;
     }
-    #mobileMenuBtn {
+    #mobileMenuBtn, #mobileMenuParent {
         display: inline-block;
-        float: right;
-        margin-top: -122px;
-        margin-right: 5px;
-        width: 40px;
+    }
+    #pokemonBattle, #yourPokemonParent, #partyGrid {
+        zoom: 0.8;
+        -moz-transform: scale(0.8);
     }
 }
 
-@media only screen and (max-width: 625) {}
+@media only screen and (max-width: 575px) {
+    body {
+        zoom: 0.95;
+        -moz-transform: scale(0.95);
+    }
+    #title {
+        margin-top: 80px;
+        zoom: 0.80;
+        -moz-transform: scale(0.80);
+    }
+    #pokemonBattle, #yourPokemonParent, #partyGrid {
+        margin-left: auto;
+        margin-right: auto;
+        zoom: 0.65;
+        -moz-transform: scale(0.65);
+    }
+}
+
+@media only screen and (max-width: 415px) {
+    #title {
+        max-width: 250px;
+        margin-top: 75px;
+        margin-bottom: 20px;
+        margin-left: auto;
+        margin-right: auto;
+        justify-content: center;
+        text-align: center;
+        zoom: 0.80;
+        -moz-transform: scale(0.80);
+    }
+    #pokemonBattle, #yourPokemonParent, #partyGrid {
+        zoom: 0.60;
+        -moz-transform: scale(0.60);
+    }
+}
