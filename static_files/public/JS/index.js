@@ -239,6 +239,7 @@ addOpponent.addEventListener('click', (e) => {
 
     if(screen.width <= 415) {
         $('html,body').scrollTop(0);
+        $('opponentNameBox').blur();
     }
 
     setUpParty();
