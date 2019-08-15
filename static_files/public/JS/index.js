@@ -237,6 +237,10 @@ addOpponent.addEventListener('click', (e) => {
         "opponent": nameCheck
     });
 
+    if(screen.width <= 415) {
+        $('html,body').scrollTop(0);
+    }
+
     setUpParty();
 });
 
