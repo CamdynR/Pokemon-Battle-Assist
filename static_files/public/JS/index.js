@@ -45,6 +45,9 @@ const setUpParty = (data) => {
                 // Extend Slot Length for move height
                 idSlotHeight = document.getElementById(idSlot);
                 idSlotHeight.style.height = 195 + (17 * linesToAdd) + "px";
+                if(screen.width < 450) {
+                    idSlotHeight.style.height = 205 + (17 * linesToAdd) + "px";
+                }
             }
 
             // Make empty slots blank

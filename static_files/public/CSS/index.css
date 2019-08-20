@@ -182,6 +182,7 @@ input:focus {
     top: 10px;
     right: 10px;
     transition: all 0.3s ease;
+    z-index: 11;
 }
 
 #logoutBtnIndex {
@@ -196,6 +197,7 @@ input:focus {
     height: 30px;
     text-align: center;
     transition: all 0.3s ease;
+    z-index: 11;
 }
 
 #logoutBtnIndex:hover {
@@ -408,6 +410,7 @@ input:focus {
     left: 0;
     height: 50px;
     width: 100%;
+    z-index: 10;
     /*transition: backgroundColor 0.3s ease;*/
 }
 
@@ -478,14 +481,6 @@ input:focus {
         -moz-transform: scale(1);
         width: 400px;
     }
-    /*
-    #pokemonBattle, #yourPokemonParent, #partyGrid {
-        margin-left: auto;
-        margin-right: auto;
-        zoom: 0.65;
-        -moz-transform: scale(0.65);
-    }
-    */
 }
 
 @media only screen and (max-width: 415px) {
@@ -520,10 +515,22 @@ input:focus {
         margin-left: -185px;
         margin-top: 280px;
     }
-    /*
-    #pokemonBattle, #yourPokemonParent, #partyGrid {
-        zoom: 0.60;
-        -moz-transform: scale(0.60);
+    #tempTxt, #opponentWord {
+        font-size: 1.2rem;
     }
-    */
+    #pokemonAnswer, #opponentPokemon {
+        height: 260px;
+    }
+    #answerName {
+        margin-top: 3px;
+    }
+    #answerName, #opponentName {
+        font-size: 1.6rem;
+    }
+    #answerMove {
+        font-size: 1.1rem;
+    }
+    #opponentNameBox {
+        margin-top: 290px;
+    }
 }
