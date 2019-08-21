@@ -35,7 +35,7 @@ const setUpParty = (data) => {
                 for (let j = 0; j < 4; j++) {
                     const currMove = docData['party'][i][nextName][j];
                     document.getElementById('poke' + (i + 1) + 'move' + (j + 1)).innerHTML = currMove;
-                    if(!currMove.includes(" ")) {
+                    if (!currMove.includes(" ")) {
                         linesToAdd += Math.floor((currMove.length / 13));
                     } else {
                         linesToAdd += Math.floor((currMove.length / 12));
@@ -45,7 +45,7 @@ const setUpParty = (data) => {
                 // Extend Slot Length for move height
                 idSlotHeight = document.getElementById(idSlot);
                 idSlotHeight.style.height = 195 + (17 * linesToAdd) + "px";
-                if(screen.width < 450) {
+                if (screen.width < 450) {
                     idSlotHeight.style.height = 205 + (17 * linesToAdd) + "px";
                 }
             }
@@ -103,35 +103,35 @@ const setUpParty = (data) => {
             const editPartyBtn = document.getElementById('editParty');
             if (docData['party'].length < 6 && editPartyBtn.innerHTML != "<h3>Edit Party</h3>") {
                 partyParent.style.display = "inline-block";
-                // Screen Media Query
+                // Screen Media Query for large screens
                 if (screen.width > 1023) {
                     partyParent.style.gridColumn = (docData['party'].length + 1);
                     partyParent.style.gridRow = 1;
-                    
-                document.getElementById('nameBox').focus();
-                } else if(screen.width > 574) {
+                    document.getElementById('nameBox').focus();
+                    // Screen Media Query for tablets
+                } else if (screen.width > 574) {
                     let tempCol = (docData['party'].length + 1) % 3;
                     if (tempCol == 0) {
                         tempCol = 3;
                     }
                     partyParent.style.gridColumn = tempCol;
                     partyParent.style.gridRow = (Math.floor(docData['party'].length / 3)) + 1;
-                    
-                document.getElementById('nameBox').focus();
+                    document.getElementById('nameBox').focus();
+                    // Screen Media Query for Phones
                 } else {
                     partyParent.style.gridColumn = "1 / span 2";
                     partyParent.style.gridRow = 1;
-                    //partyParent.style.gridColumn = 1 + (docData['party'].length % 2);
-                    //partyParent.style.gridRow = 1 + Math.floor(docData['party'].length / 2);;
                 }
             } else {
-                // Screen Media Query
+                // Screen Media Query for large screens
                 if (screen.width > 1023) {
                     partyParent.style.gridColumn = 1;
                     partyParent.style.gridRow = 2;
-                } else if(screen.width > 574) {
+                    // Screen Media Query for tablets
+                } else if (screen.width > 574) {
                     partyParent.style.gridColumn = 1;
                     partyParent.style.gridRow = 3;
+                    // Screen Media Query for Phones
                 } else {
                     partyParent.style.gridColumn = 1;
                     partyParent.style.gridRow = 4;
@@ -148,6 +148,7 @@ const setUpParty = (data) => {
         console.log("Error getting document:", error);
     });
 }
+
 
 // Add Pokemon to Party
 const addPokemon = document.getElementById('addParty');
@@ -172,12 +173,14 @@ addPokemon.addEventListener('click', (e) => {
         document.getElementById('moveBox3').value, document.getElementById('moveBox4').value
     ];
 
+    // Checks to see if if at least one move was entered
     if (moves[0] == '' && moves[1] == '' && moves[2] == '' && moves[3] == '') {
         document.getElementById("validMove").innerHTML = "Please enter at least one move";
         setUpParty();
         return;
     }
 
+    // Checks to see if every move entered was valid
     for (let i = 0; i < 4; i++) {
         if (moves[i] != '') {
             if (!pokemonMoves.includes(moves[i])) {
@@ -191,10 +194,12 @@ addPokemon.addEventListener('click', (e) => {
     document.getElementById("validPokemon").innerHTML = "";
     document.getElementById("validMove").innerHTML = "";
 
+    // Connects to firebase and adds in the entered pokemon/moves
     docRef.get().then(function(doc) {
         if (doc.exists) {
             docData = doc.data();
-            let newArr = [];
+
+            // Check to see if the party isn't full
             if (docData['party'].length >= 6) {
                 console.log("Party is full");
                 document.getElementById('nameBox').value = '';
@@ -204,9 +209,15 @@ addPokemon.addEventListener('click', (e) => {
                 document.getElementById('moveBox4').value = '';
                 return;
             }
+
+            // Create a new array and add the current Firebase party to it
+            let newArr = [];
             for (let i = 0; i < docData['party'].length; i++) {
                 newArr.push(docData['party'][i]);
             }
+
+
+            // Create a new object for the entered Pokemon and append to party array
             var pokeObj = {};
             let move1 = document.getElementById('moveBox1').value;
             let move2 = document.getElementById('moveBox2').value;
@@ -214,7 +225,8 @@ addPokemon.addEventListener('click', (e) => {
             let move4 = document.getElementById('moveBox4').value;
             pokeObj[pokemonToAdd.value] = [move1, move2, move3, move4];
             newArr.push(pokeObj);
-            // newArr.push(pokemonToAdd.value);
+
+            // Push the updated party to Firebase
             docRef.update({
                 "party": newArr,
             }).catch(err => {
@@ -251,7 +263,7 @@ addOpponent.addEventListener('click', (e) => {
         "opponent": nameCheck
     });
 
-    if(screen.width <= 415) {
+    if (screen.width <= 415) {
         $('html,body').scrollTop(0);
         $('opponentNameBox').blur();
     }
@@ -331,7 +343,7 @@ menuButton.addEventListener('click', (e) => {
     const mobileParent = document.getElementById('mobileMenuParent');
     const loginUser = document.getElementById('loginUser');
     const logoutBtnIndex = document.getElementById('logoutBtnIndex');
-    if(mobileParent.style.height == "50px" || mobileParent.style.height == "") {
+    if (mobileParent.style.height == "50px" || mobileParent.style.height == "") {
         mobileParent.style.height = "120px";
         menuButton.style.marginTop = "68px";
         loginUser.style.display = "inline-block";
@@ -344,7 +356,7 @@ menuButton.addEventListener('click', (e) => {
     }
 
     var scroll = $(window).scrollTop();
-    if($("#mobileMenuParent").hasClass("active") && scroll == 0) {
+    if ($("#mobileMenuParent").hasClass("active") && scroll == 0) {
         $("#mobileMenuParent").removeClass("active");
     } else {
         $("#mobileMenuParent").addClass("active");
@@ -352,13 +364,12 @@ menuButton.addEventListener('click', (e) => {
 });
 
 // Add dropshadow to mobile header when scrolled
-$(window).scroll(function() {     
+$(window).scroll(function() {
     var scroll = $(window).scrollTop();
     const mobileParent = document.getElementById('mobileMenuParent');
     if (scroll > 0) {
         $("#mobileMenuParent").addClass("active");
-    }
-    else if(scroll == 0 && mobileParent.style.height != "120px") {
+    } else if (scroll == 0 && mobileParent.style.height != "120px") {
         $("#mobileMenuParent").removeClass("active");
     }
 });
