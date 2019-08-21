@@ -485,11 +485,11 @@ input:focus {
 
 @media only screen and (max-width: 415px) {
     #editParty {
-        font-size: 0.75rem;
+        font-size: 0.73rem;
         width: 95px;
     }
     #logoutBtnIndex {
-        font-size: 1rem;
+        font-size: 0.9rem;
     }
     #title {
         max-width: 250px;
