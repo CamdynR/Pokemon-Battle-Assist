@@ -216,7 +216,6 @@ addPokemon.addEventListener('click', (e) => {
                 newArr.push(docData['party'][i]);
             }
 
-
             // Create a new object for the entered Pokemon and append to party array
             var pokeObj = {};
             let move1 = document.getElementById('moveBox1').value;
@@ -242,6 +241,7 @@ addPokemon.addEventListener('click', (e) => {
     });
 });
 
+
 // Add Opponent Pokemon
 const addOpponent = document.getElementById('opponentParty');
 let opponentToAdd = document.getElementById('opponentNameBox');
@@ -259,10 +259,12 @@ addOpponent.addEventListener('click', (e) => {
         document.getElementById("validOpponent").innerHTML = "";
     }
 
+    // Push new Opponent Pokemon to Firebase
     docRef.update({
         "opponent": nameCheck
     });
 
+    // If on a mobile screen, onfocus from opponent pokemon input box
     if (screen.width <= 415) {
         $('html,body').scrollTop(0);
         $('opponentNameBox').blur();
@@ -270,6 +272,7 @@ addOpponent.addEventListener('click', (e) => {
 
     setUpParty();
 });
+
 
 // Delete Pokemon from Party
 function delPokemon(partyNum) {
@@ -279,11 +282,15 @@ function delPokemon(partyNum) {
         if (doc.exists) {
             docData = doc.data();
             let newArr = [];
+
+            // Add every party member to array except the one to delete
             for (let i = 0; i < docData['party'].length; i++) {
                 if (i + 1 != partyNum) {
                     newArr.push(docData['party'][i]);
                 }
             }
+
+            // Push the new array to Firebase
             docRef.update({
                 party: newArr,
             }).then(() => {
@@ -291,15 +298,18 @@ function delPokemon(partyNum) {
             }).catch(err => {
                 console.log(err.message);
             });
+
         } else {
             // doc.data() will be undefined in this case
             console.log("No such document!");
         }
+
         setUpParty();
     }).catch(function(error) {
         console.log("Error getting document:", error);
     });
 }
+
 
 // Displays the current User's name in the upper right
 const getUsercred = (user) => {
@@ -310,6 +320,7 @@ const getUsercred = (user) => {
         username.innerHTML = '';
     }
 }
+
 
 // Adds the input form for new pokemon when clicked
 const editParty = document.getElementById('editParty');
@@ -324,9 +335,9 @@ editParty.addEventListener('click', (e) => {
         for (let i = 0; i < xBtn.length; i++) {
             xBtn[i].style.visibility = "visible";
         }
+
     } else {
         editParty.innerHTML = "<h3>Edit Party</h3>";
-
         const xBtn = document.getElementsByClassName("xBtn");
         for (let i = 0; i < xBtn.length; i++) {
             xBtn[i].style.visibility = "hidden";
