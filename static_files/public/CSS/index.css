@@ -485,8 +485,9 @@ input:focus {
 
 @media only screen and (max-width: 415px) {
     #editParty {
-        font-size: 0.73rem;
-        width: 95px;
+        font-size: 0.72rem;
+        width: 97px;
+        margin-left: -12px;
     }
     #logoutBtnIndex {
         font-size: 0.9rem;
