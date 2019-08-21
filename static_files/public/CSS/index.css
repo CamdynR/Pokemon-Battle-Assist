@@ -487,7 +487,7 @@ input:focus {
     #editParty {
         font-size: 0.72rem;
         width: 97px;
-        margin-left: -5px;
+        margin-left: 15px;
     }
     #logoutBtnIndex {
         font-size: 0.9rem;
