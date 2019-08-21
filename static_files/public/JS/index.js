@@ -107,23 +107,34 @@ const setUpParty = (data) => {
                 if (screen.width > 1023) {
                     partyParent.style.gridColumn = (docData['party'].length + 1);
                     partyParent.style.gridRow = 1;
-                } else {
+                    
+                document.getElementById('nameBox').focus();
+                } else if(screen.width > 574) {
                     let tempCol = (docData['party'].length + 1) % 3;
                     if (tempCol == 0) {
                         tempCol = 3;
                     }
                     partyParent.style.gridColumn = tempCol;
                     partyParent.style.gridRow = (Math.floor(docData['party'].length / 3)) + 1;
-                }
+                    
                 document.getElementById('nameBox').focus();
+                } else {
+                    partyParent.style.gridColumn = "1 / span 2";
+                    partyParent.style.gridRow = 1;
+                    //partyParent.style.gridColumn = 1 + (docData['party'].length % 2);
+                    //partyParent.style.gridRow = 1 + Math.floor(docData['party'].length / 2);;
+                }
             } else {
                 // Screen Media Query
                 if (screen.width > 1023) {
                     partyParent.style.gridColumn = 1;
                     partyParent.style.gridRow = 2;
-                } else {
+                } else if(screen.width > 574) {
                     partyParent.style.gridColumn = 1;
                     partyParent.style.gridRow = 3;
+                } else {
+                    partyParent.style.gridColumn = 1;
+                    partyParent.style.gridRow = 4;
                 }
                 partyParent.style.display = "none";
             }

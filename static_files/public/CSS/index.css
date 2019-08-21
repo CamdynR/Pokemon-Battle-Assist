@@ -533,4 +533,10 @@ input:focus {
     #opponentNameBox {
         margin-top: 290px;
     }
+    html {
+        margin-left: 5px;
+    }
+    #addParty {
+        margin-left: -3px;
+    }
 }
