@@ -539,4 +539,7 @@ input:focus {
     #addParty {
         margin-left: -3px;
     }
+    .xBtn {
+        margin-left: 90px;
+    }
 }
