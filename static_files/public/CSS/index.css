@@ -485,7 +485,10 @@ input:focus {
 
 @media only screen and (max-width: 415px) {
     button h3 {
-        font-size: 0.8rem;
+        font-size: 0.7rem;
+    }
+    #logoutBtnIndex {
+        font-size: 0.7rem;
     }
     #title {
         max-width: 250px;
