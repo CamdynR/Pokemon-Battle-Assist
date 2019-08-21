@@ -539,12 +539,15 @@ input:focus {
         margin-top: 290px;
     }
     html {
-        margin-left: 5px;
+        margin-left: 10px;
     }
     #addParty {
         margin-left: -3px;
     }
     .xBtn {
         margin-left: 90px;
+    }
+    .yourPokemon {
+        margin-left: -10px;
     }
 }
