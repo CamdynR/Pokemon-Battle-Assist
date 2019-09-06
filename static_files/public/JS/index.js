@@ -13,7 +13,7 @@ const setUpParty = (data) => {
             docData = doc.data();
 
             // Add Pokemon to empty slots
-            for (let i = 0; i < docData['party'].length; i++) {
+            for (let i = 0; i < Object.keys(docData['party']).length; i++) {
                 const nextName = Object.keys(docData['party'][i])[0];
                 const idName = 'pokemonName' + [i + 1];
                 const idImg = 'pokemonImage' + [i + 1];
@@ -101,21 +101,21 @@ const setUpParty = (data) => {
             const partyParent = document.getElementById('editPartyParent');
             const addForm = document.getElementById('addForm');
             const editPartyBtn = document.getElementById('editParty');
-            if (docData['party'].length < 6 && editPartyBtn.innerHTML != "<h3>Edit Party</h3>") {
+            if (Object.keys(docData['party']).length < 6 && editPartyBtn.innerHTML != "<h3>Edit Party</h3>") {
                 partyParent.style.display = "inline-block";
                 // Screen Media Query for large screens
                 if (screen.width > 1023) {
-                    partyParent.style.gridColumn = (docData['party'].length + 1);
+                    partyParent.style.gridColumn = (Object.keys(docData['party']).length + 1);
                     partyParent.style.gridRow = 1;
                     document.getElementById('nameBox').focus();
                     // Screen Media Query for tablets
                 } else if (screen.width > 574) {
-                    let tempCol = (docData['party'].length + 1) % 3;
+                    let tempCol = (Object.keys(docData['party']).length + 1) % 3;
                     if (tempCol == 0) {
                         tempCol = 3;
                     }
                     partyParent.style.gridColumn = tempCol;
-                    partyParent.style.gridRow = (Math.floor(docData['party'].length / 3)) + 1;
+                    partyParent.style.gridRow = (Math.floor(Object.keys(docData['party']).length / 3)) + 1;
                     document.getElementById('nameBox').focus();
                     // Screen Media Query for Phones
                 } else {
@@ -200,7 +200,7 @@ addPokemon.addEventListener('click', (e) => {
             docData = doc.data();
 
             // Check to see if the party isn't full
-            if (docData['party'].length >= 6) {
+            if (Object.keys(docData['party']).length >= 6) {
                 console.log("Party is full");
                 document.getElementById('nameBox').value = '';
                 document.getElementById('moveBox1').value = '';
@@ -212,7 +212,7 @@ addPokemon.addEventListener('click', (e) => {
 
             // Create a new array and add the current Firebase party to it
             let newArr = [];
-            for (let i = 0; i < docData['party'].length; i++) {
+            for (let i = 0; i < Object.keys(docData['party']).length; i++) {
                 newArr.push(docData['party'][i]);
             }
 
@@ -284,7 +284,7 @@ function delPokemon(partyNum) {
             let newArr = [];
 
             // Add every party member to array except the one to delete
-            for (let i = 0; i < docData['party'].length; i++) {
+            for (let i = 0; i < Object.keys(docData['party']).length; i++) {
                 if (i + 1 != partyNum) {
                     newArr.push(docData['party'][i]);
                 }

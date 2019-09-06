@@ -23,10 +23,11 @@ googleSignInBtn.addEventListener('click', e => {
 
         var user = result.user;
 
-        return db.collection('users').doc(user.uid).set({
-            party: {}
-        });
-
+        /*
+        var partyArray = [];
+        var party = new firebase.firestore.FieldValue(partyArray); */
+        return db.collection('users').doc(user.uid).set({});
+        
     }).catch(function(error) {
 
         var errorCode = error.code;
@@ -55,9 +56,8 @@ facebookSignInBtn.addEventListener('click', e => {
         var user = result.user;
 
         console.log("test");
-        return db.collection('users').doc(user.uid).set({
-            party: {}
-        });
+        return db.collection('users').doc(user.uid).set({});
+        
     }).catch(function(error) {
         var errorCode = error.code;
         var errorMessage = error.message;

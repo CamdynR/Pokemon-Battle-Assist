@@ -17,7 +17,7 @@ function chooseMove() {
             // Get the moves and their types
             docData = doc.data();
             if (Object.keys(docData['party']).length > 0 && docData['opponent']) {
-                for (let i = 0; i < docData['party'].length; i++) {
+                for (let i = 0; i < Object.keys(docData['party']).length; i++) {
                     const nextName = Object.keys(docData['party'][i])[0];
                     for (let j = 0; j < 4; j++) {
                         const currMove = docData['party'][i][nextName][j];
@@ -92,7 +92,7 @@ function chooseMove() {
                     if (superNotEffective != "") { finalMovePick = superNotEffective }
                 }
 
-                for (let i = 0; i < docData['party'].length; i++) {
+                for (let i = 0; i < Object.keys(docData['party']).length; i++) {
                     const nextName = Object.keys(docData['party'][i])[0];
                     for (let j = 0; j < 4; j++) {
                         if (docData['party'][i][nextName][j] == finalMovePick) {
